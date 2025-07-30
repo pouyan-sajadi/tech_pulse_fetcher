@@ -1,0 +1,831 @@
+{
+  "metadata": {
+    "fetched_at": "2025-07-12T20:21:50.311422",
+    "sources": [
+      "Product Hunt",
+      "GitHub Trending",
+      "RSS Feeds",
+      "Manifold Markets"
+    ],
+    "total_items": 55
+  },
+  "product_hunt": [
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Quit Confirmer for Safari",
+      "tagline": "Prevent accidental Safari quit\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Prevent accidental Safari quit\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/quit-confirmer-for-safari",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-11T08:59:47-07:00",
+      "fetched_at": "2025-07-12T20:21:50.529998"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Qwen Chat for Desktop",
+      "tagline": "Qwen Chat are now available for macOS\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Qwen Chat are now available for macOS\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/qwen-chat-for-desktop",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-11T11:12:54-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530179"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Iconed",
+      "tagline": "Create icons for apps and folders — fast and beautifully.\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Create icons for apps and folders — fast and beautifully.\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/iconed",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-08T06:26:44-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530316"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Essays by Paul Graham GPT",
+      "tagline": "A tool for thinking — unrestrictive and full of surprises.\n          \n\nDiscussion\n            |\n            Link",
+      "description": "A tool for thinking — unrestrictive and full of surprises.\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/essays-by-paul-graham-gpt",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-11T04:49:25-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530445"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Speech in Flow",
+      "tagline": "Bring your images to life with speech\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Bring your images to life with speech\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/speech-in-flow",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-11T10:02:44-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530558"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "GetGenAI",
+      "tagline": "AI compliance checks for marketing teams\n          \n\nDiscussion\n            |\n            Link",
+      "description": "AI compliance checks for marketing teams\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/getgenai",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-10T15:21:57-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530661"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Formix",
+      "tagline": "Connect forms to google sheets\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Connect forms to google sheets\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/formix",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-10T10:14:52-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530757"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Permut",
+      "tagline": "AI Agents for customer listening and feedback collection\n          \n\nDiscussion\n            |\n            Link",
+      "description": "AI Agents for customer listening and feedback collection\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/permut",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-10T08:15:47-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530887"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "Exists",
+      "tagline": "Generate your own 3D worlds and team-deathmatch in minutes\n          \n\nDiscussion\n            |\n            Link",
+      "description": "Generate your own 3D worlds and team-deathmatch in minutes\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/exists",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-01T04:36:50-07:00",
+      "fetched_at": "2025-07-12T20:21:50.530992"
+    },
+    {
+      "source": "Product Hunt (RSS)",
+      "title": "ZeroEntropy (YC W25)",
+      "tagline": "The engine for human-level search\n          \n\nDiscussion\n            |\n            Link",
+      "description": "The engine for human-level search\n          \n\nDiscussion\n            |\n            Link",
+      "url": "https://www.producthunt.com/posts/zeroentropy-yc-w25",
+      "votes": 0,
+      "comments": 0,
+      "published": "2025-07-10T10:04:50-07:00",
+      "fetched_at": "2025-07-12T20:21:50.531089"
+    }
+  ],
+  "github_trending": [
+    {
+      "source": "GitHub Trending",
+      "title": "snap-stanford/Biomni",
+      "description": "Biomni: a general-purpose biomedical AI agent",
+      "url": "https://github.com/snap-stanford/Biomni",
+      "language": "Python",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.620781"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "open-telemetry/opentelemetry-go",
+      "description": "OpenTelemetry Go API and SDK",
+      "url": "https://github.com/open-telemetry/opentelemetry-go",
+      "language": "Go",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.620930"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "googleapis/genai-toolbox",
+      "description": "MCP Toolbox for Databases is an open source MCP server for databases.",
+      "url": "https://github.com/googleapis/genai-toolbox",
+      "language": "Go",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621067"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "protocolbuffers/protobuf",
+      "description": "Protocol Buffers - Google's data interchange format",
+      "url": "https://github.com/protocolbuffers/protobuf",
+      "language": "C++",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621197"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "getzep/graphiti",
+      "description": "Build Real-Time Knowledge Graphs for AI Agents",
+      "url": "https://github.com/getzep/graphiti",
+      "language": "Python",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621325"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "pybind/pybind11",
+      "description": "Seamless operability between C++11 and Python",
+      "url": "https://github.com/pybind/pybind11",
+      "language": "C++",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621452"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "WordPress/wordpress-develop",
+      "description": "WordPress Develop, Git-ified. Synced from git://develop.git.wordpress.org/, including branches and tags! This repository is just a mirror of the WordPress subversion repository. Please include a link to a pre-existing ticket on https://core.trac.wordpress.org/ with every pull request.",
+      "url": "https://github.com/WordPress/wordpress-develop",
+      "language": "PHP",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621582"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "gorhill/uBlock",
+      "description": "uBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean.",
+      "url": "https://github.com/gorhill/uBlock",
+      "language": "JavaScript",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621707"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "landing-ai/agentic-doc",
+      "description": "Python library for Agentic Document Extraction from LandingAI",
+      "url": "https://github.com/landing-ai/agentic-doc",
+      "language": "Python",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621832"
+    },
+    {
+      "source": "GitHub Trending",
+      "title": "zijie0/HumanSystemOptimization",
+      "description": "健康学习到150岁 - 人体系统调优不完全指南",
+      "url": "https://github.com/zijie0/HumanSystemOptimization",
+      "language": "Unknown",
+      "stars": 0,
+      "stars_today": 0,
+      "fetched_at": "2025-07-12T20:21:51.621957"
+    }
+  ],
+  "rss_articles": [
+    {
+      "source": "RSS - TechCrunch",
+      "title": "A United Nations research institute created an AI refugee avatar",
+      "description": "A research institute connected to the United Nations has created two AI-powered avatars designed to teach people about refugee issues. 404 Media wrote about an experiment conducted by a class at the United Nations University Center for Policy Research that resulted in the creation of two AI agents or avatars — Amina, a fictional woman […]",
+      "url": "https://techcrunch.com/2025/07/12/a-united-nations-research-institute-created-an-ai-refugee-avatar/",
+      "published": "Sat, 12 Jul 2025 21:03:39 +0000",
+      "author": "Anthony Ha",
+      "tags": [
+        "AI",
+        "Government & Policy",
+        "united nations"
+      ],
+      "fetched_at": "2025-07-12T20:21:51.753431"
+    },
+    {
+      "source": "RSS - TechCrunch",
+      "title": "Marc Andreessen reportedly told group chat that universities will ‘pay the price’ for DEI",
+      "description": "Venture capitalist Marc Andreessen sharply criticized universities including Stanford and MIT, along with the National Science Foundation, in a group chat with AI scientists and Trump administration officials, according to screenshots viewed by the Washington Post.",
+      "url": "https://techcrunch.com/2025/07/12/marc-andreessen-reportedly-told-group-chat-that-universities-will-pay-the-price-for-dei/",
+      "published": "Sat, 12 Jul 2025 20:07:29 +0000",
+      "author": "Anthony Ha",
+      "tags": [
+        "Government & Policy",
+        "Venture",
+        "a16z",
+        "Marc Andreessen"
+      ],
+      "fetched_at": "2025-07-12T20:21:51.753474"
+    },
+    {
+      "source": "RSS - TechCrunch",
+      "title": "Week in Review: X CEO Linda Yaccarino steps down",
+      "description": "Welcome back to Week in Review! We’ve got tons of news for you this week, including a shakeup at X, Hugging Face’s new robot, new phones from Nothing and Samsung, and a whole lot more. Have a great weekend! Off to do something else: X CEO Linda Yaccarino stepped down this week after a tumultuous […]",
+      "url": "https://techcrunch.com/2025/07/12/week-in-review-x-ceo-linda-yaccarino-steps-down/",
+      "published": "Sat, 12 Jul 2025 18:03:52 +0000",
+      "author": "Karyne Levy",
+      "tags": [
+        "Social",
+        "Apple",
+        "Elon Musk",
+        "jack dorsey",
+        "Week in Review",
+        "linda yaccarino",
+        "Grok"
+      ],
+      "fetched_at": "2025-07-12T20:21:51.753522"
+    },
+    {
+      "source": "RSS - TechCrunch",
+      "title": "xAI and Grok apologize for ‘horrific behavior’",
+      "description": "In a series of posts on X, the AI chatbot Grok apologized for what it admitted was “horrific behavior.”\n\nThe posts appear to be an official statement from xAI, the Elon Musk-led company behind Grok, as opposed to an AI-generated explanation for Grok’s posts. (xAI recently acquired X, where Grok is prominently featured.)",
+      "url": "https://techcrunch.com/2025/07/12/xai-and-grok-apologize-for-horrific-behavior/",
+      "published": "Sat, 12 Jul 2025 17:13:39 +0000",
+      "author": "Anthony Ha",
+      "tags": [
+        "AI",
+        "Social",
+        "Elon Musk",
+        "Grok",
+        "X",
+        "xAI"
+      ],
+      "fetched_at": "2025-07-12T20:21:51.753554"
+    },
+    {
+      "source": "RSS - TechCrunch",
+      "title": "Just 3 days left to save before TechCrunch All Stage 2025 lights up Boston",
+      "description": "In only 3 days, founders, investors, and operators will flood into the SoWa Power Station in Boston for TechCrunch All Stage 2025 — and if you haven’t grabbed your pass yet, this is your final window to lock in the lowest prices available and save up to $475. Whether you’re a first-time founder or a […]",
+      "url": "https://techcrunch.com/2025/07/12/just-3-days-left-to-save-before-tc-all-stage-2025-lights-up-boston/",
+      "published": "Sat, 12 Jul 2025 13:00:00 +0000",
+      "author": "TechCrunch Events",
+      "tags": [
+        "TC",
+        "Startups",
+        "Venture",
+        "AI",
+        "Fundraising",
+        "TechCrunch All Stage 2025",
+        "TC All Stage",
+        "TC All Stage 2025",
+        "TechCrunch All Stage"
+      ],
+      "fetched_at": "2025-07-12T20:21:51.753594"
+    },
+    {
+      "source": "RSS - The Verge",
+      "title": "The best Amazon Prime Day deals you can still shop",
+      "description": "Amazon’s first four-day Prime Day technically ended yesterday, but a few deals have stuck around a little longer. You won’t see a bright red “Prime Day Deal” tag anymore, which can make these stragglers a little hard to find, so we’ve collected them for you. These deals could end at any time, and we wouldn’t […]",
+      "url": "https://www.theverge.com/tech/705786/amazon-prime-day-best-tech-deals-still-available-2025",
+      "published": "2025-07-12T10:53:07-04:00",
+      "author": "Brandt Ranj",
+      "tags": [
+        "Deals",
+        "Prime Day",
+        "Tech"
+      ],
+      "fetched_at": "2025-07-12T20:21:53.022112"
+    },
+    {
+      "source": "RSS - The Verge",
+      "title": "24 hours with Alexa Plus: we cooked, we chatted, and it kinda lied to me",
+      "description": "I've waited two years to try out the new Alexa, which was first announced way back in 2023, and this week I finally got access to Alexa Plus. I've now spent 24 hours with Amazon's generative AI-powered voice assistant, and it's not just an improvement on the original; it's an entirely new assistant. Alexa Plus […]",
+      "url": "https://www.theverge.com/hands-on/705808/amazon-alexa-plus-first-look",
+      "published": "2025-07-12T10:00:00-04:00",
+      "author": "Jennifer Pattison Tuohy",
+      "tags": [
+        "Amazon",
+        "Amazon Alexa",
+        "Hands-on",
+        "Reviews",
+        "Smart Home",
+        "Smart Home Reviews",
+        "Tech"
+      ],
+      "fetched_at": "2025-07-12T20:21:53.022167"
+    },
+    {
+      "source": "RSS - The Verge",
+      "title": "Playdate’s second season sucked me back into the little yellow handheld",
+      "description": "The Playdate is easy to forget about. It's colorful and weird, but it's also tiny. Like the Game Boy Micro before it, sometimes I toss it in a bag and then can't remember where I put it. But over the past few weeks, the yellow handheld has been in constant rotation in my house, despite […]",
+      "url": "https://www.theverge.com/games-review/705348/playdate-season-2-review",
+      "published": "2025-07-12T09:00:00-04:00",
+      "author": "Andrew Webster",
+      "tags": [
+        "Entertainment",
+        "Games Review",
+        "Gaming"
+      ],
+      "fetched_at": "2025-07-12T20:21:53.022205"
+    },
+    {
+      "source": "RSS - The Verge",
+      "title": "Rivian R1S review: second time’s the charm",
+      "description": "Just four years after Rivian began selling its R1T truck, 2025 marks the beginning of the R1T and R1S' second generation. Considering they look essentially the same on the outside, it might be hard to decipher what warrants a new generation. But underneath, it's actually quite easy: all-new electric architecture, a new motor arrangement, retuned […]",
+      "url": "https://www.theverge.com/electric-cars/689400/rivian-r1s-review-second-times-the-charm",
+      "published": "2025-07-12T08:00:00-04:00",
+      "author": "Peter Nelson",
+      "tags": [
+        "Cars",
+        "Electric Cars",
+        "Reviews",
+        "Tech",
+        "Transportation"
+      ],
+      "fetched_at": "2025-07-12T20:21:53.022237"
+    },
+    {
+      "source": "RSS - The Verge",
+      "title": "Prime Day is almost over, but our favorite deals are still live",
+      "description": "Editor’s note: That’s a wrap, folks! As Prime Day 2025 draws to a close, we’ll no longer be updating this article with additional deals and insights. Plenty of great deals remain, however, so be sure to check out all of our Prime Day coverage for anything you may have missed. There are mere hours left […]",
+      "url": "https://www.theverge.com/tech/697602/amazon-prime-day-sale-best-tech-deals-2025-day-4",
+      "published": "2025-07-12T01:03:24-04:00",
+      "author": "Brandt Ranj",
+      "tags": [
+        "Amazon",
+        "Deals",
+        "Prime Day",
+        "Roundup",
+        "Tech"
+      ],
+      "fetched_at": "2025-07-12T20:21:53.022268"
+    },
+    {
+      "source": "RSS - Ars Technica",
+      "title": "5 big EV takeaways from Trump’s “One Big Beautiful Bill”",
+      "description": "Experts have advice for how the EV-curious buyer might navigate this tricky moment.",
+      "url": "https://arstechnica.com/cars/2025/07/5-big-ev-takeaways-from-trumps-one-big-beautiful-bill/",
+      "published": "Sat, 12 Jul 2025 11:12:00 +0000",
+      "author": "Aarian Marshall, WIRED.com",
+      "tags": [
+        "Cars",
+        "EV charger",
+        "EVs",
+        "One Big Beautiful Bill",
+        "syndication"
+      ],
+      "fetched_at": "2025-07-12T20:21:54.104859"
+    },
+    {
+      "source": "RSS - Ars Technica",
+      "title": "AI therapy bots fuel delusions and give dangerous advice, Stanford study finds",
+      "description": "Popular chatbots serve as poor replacements for human therapists, but study authors call for nuance.",
+      "url": "https://arstechnica.com/ai/2025/07/ai-therapy-bots-fuel-delusions-and-give-dangerous-advice-stanford-study-finds/",
+      "published": "Fri, 11 Jul 2025 22:01:10 +0000",
+      "author": "Benj Edwards",
+      "tags": [
+        "AI",
+        "Biz & IT",
+        "Science",
+        "7cups",
+        "AI behavior",
+        "AI ethics",
+        "AI regulation",
+        "AI safety",
+        "AI sycophancy",
+        "Character.AI",
+        "ChatGPT",
+        "clinical psychology",
+        "delusions",
+        "Jared Moore",
+        "machine learning",
+        "mental health",
+        "Nick Haber",
+        "openai",
+        "Stanford University",
+        "stigma",
+        "suicidal ideation",
+        "therapy"
+      ],
+      "fetched_at": "2025-07-12T20:21:54.104913"
+    },
+    {
+      "source": "RSS - Ars Technica",
+      "title": "Man’s heart stopped after common bacterium caused ultra-rare infection",
+      "description": "The bacterium is widespread in the environment, but only rarely causes disease.",
+      "url": "https://arstechnica.com/health/2025/07/mans-heart-stopped-after-common-bacterium-caused-ultra-rare-infection/",
+      "published": "Fri, 11 Jul 2025 21:35:11 +0000",
+      "author": "Beth Mole",
+      "tags": [
+        "Health",
+        "endocarditis",
+        "heart",
+        "infection",
+        "whipple's disease"
+      ],
+      "fetched_at": "2025-07-12T20:21:54.104944"
+    },
+    {
+      "source": "RSS - Ars Technica",
+      "title": "New Windows 11 build adds self-healing “quick machine recovery” feature",
+      "description": "New recovery mode lets Microsoft fix \"widespread boot issues\" affecting PCs.",
+      "url": "https://arstechnica.com/gadgets/2025/07/new-windows-11-build-adds-self-healing-quick-machine-recovery-feature/",
+      "published": "Fri, 11 Jul 2025 20:56:40 +0000",
+      "author": "Andrew Cunningham",
+      "tags": [
+        "Security",
+        "Tech",
+        "windows 11",
+        "windows 11 24h2",
+        "windows 11 25h2"
+      ],
+      "fetched_at": "2025-07-12T20:21:54.104969"
+    },
+    {
+      "source": "RSS - Ars Technica",
+      "title": "Belkin shows tech firms getting too comfortable with bricking customers’ stuff",
+      "description": "There's no easy alternative, and IoT customers are paying the price.",
+      "url": "https://arstechnica.com/gadgets/2025/07/belkin-shows-tech-firms-getting-too-comfortable-with-bricking-customers-stuff/",
+      "published": "Fri, 11 Jul 2025 18:54:57 +0000",
+      "author": "Scharon Harding",
+      "tags": [
+        "Tech",
+        "smart home"
+      ],
+      "fetched_at": "2025-07-12T20:21:54.104994"
+    },
+    {
+      "source": "RSS - MIT Tech Review",
+      "title": "The Download: cybersecurity’s shaky alert system, and mobile IVF",
+      "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. Cybersecurity’s global alarm system is breaking down Every day, billions of people trust digital systems to run everything from communication to commerce to critical infrastructure. But the global early warning system that alerts…",
+      "url": "https://www.technologyreview.com/2025/07/11/1120003/the-download-cybersecuritys-shaky-alert-system-and-mobile-ivf/",
+      "published": "Fri, 11 Jul 2025 12:14:00 +0000",
+      "author": "Charlotte Jee",
+      "tags": [
+        "The Download"
+      ],
+      "fetched_at": "2025-07-12T20:21:55.109108"
+    },
+    {
+      "source": "RSS - MIT Tech Review",
+      "title": "Cybersecurity’s global alarm system is breaking down",
+      "description": "Every day, billions of people trust digital systems to run everything from communication to commerce to critical infrastructure. But the global early warning system that alerts security teams to dangerous software flaws is showing critical gaps in coverage—and most users have no idea their digital lives are likely becoming more vulnerable. Over the past 18…",
+      "url": "https://www.technologyreview.com/2025/07/11/1119370/cybersecurity-alarm-system-breaking-down/",
+      "published": "Fri, 11 Jul 2025 09:00:00 +0000",
+      "author": "Matthew King",
+      "tags": [
+        "Computing",
+        "App"
+      ],
+      "fetched_at": "2025-07-12T20:21:55.109156"
+    },
+    {
+      "source": "RSS - MIT Tech Review",
+      "title": "The first babies have been born following “simplified” IVF in a mobile lab",
+      "description": "This week I’m sending congratulations to two sets of parents in South Africa. Babies Milayah and Rossouw arrived a few weeks ago. All babies are special, but these two set a new precedent. They’re the first to be born following “simplified” IVF performed in a mobile lab. This new mobile lab is essentially a trailer…",
+      "url": "https://www.technologyreview.com/2025/07/11/1119976/first-babies-born-simplified-ivf-mobile-lab/",
+      "published": "Fri, 11 Jul 2025 09:00:00 +0000",
+      "author": "Jessica Hamzelou",
+      "tags": [
+        "Biotechnology and health",
+        "App",
+        "The Checkup"
+      ],
+      "fetched_at": "2025-07-12T20:21:55.109193"
+    },
+    {
+      "source": "RSS - MIT Tech Review",
+      "title": "The Download: flaws in anti-AI protections for art, and an AI regulation vibe shift",
+      "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. This tool strips away anti-AI protections from digital art The news: A new technique called LightShed will make it harder for artists to use existing protective tools to stop their work from being…",
+      "url": "https://www.technologyreview.com/2025/07/10/1119961/the-download-anti-ai-art-regulation-vibe-shift/",
+      "published": "Thu, 10 Jul 2025 12:10:00 +0000",
+      "author": "Charlotte Jee",
+      "tags": [
+        "The Download"
+      ],
+      "fetched_at": "2025-07-12T20:21:55.109242"
+    },
+    {
+      "source": "RSS - MIT Tech Review",
+      "title": "China’s energy dominance in three charts",
+      "description": "China is the dominant force in next-generation energy technologies today. It’s pouring hundreds of billions of dollars into putting renewable sources like wind and solar on its grid, manufacturing millions of electric vehicles, and building out capacity for energy storage, nuclear power, and more. This investment has been transformational for the country’s economy and has…",
+      "url": "https://www.technologyreview.com/2025/07/10/1119941/china-energy-dominance-three-charts/",
+      "published": "Thu, 10 Jul 2025 10:00:00 +0000",
+      "author": "Casey Crownhart",
+      "tags": [
+        "Climate change and energy",
+        "App",
+        "The Spark"
+      ],
+      "fetched_at": "2025-07-12T20:21:55.109270"
+    },
+    {
+      "source": "RSS - Hacker News Best",
+      "title": "MacPaint Art from the Mid-80s Still Looks Great Today",
+      "description": "Article URL: https://blog.decryption.net.au/posts/macpaint.html\nComments URL: https://news.ycombinator.com/item?id=44540402\nPoints: 725\n# Comments: 164",
+      "url": "https://blog.decryption.net.au/posts/macpaint.html",
+      "published": "Sat, 12 Jul 2025 08:45:15 +0000",
+      "author": "decryption",
+      "tags": [],
+      "fetched_at": "2025-07-12T20:21:55.882448"
+    },
+    {
+      "source": "RSS - Hacker News Best",
+      "title": "OpenAI’s Windsurf deal is off, and Windsurf’s CEO is going to Google",
+      "description": "Article URL: https://www.theverge.com/openai/705999/google-windsurf-ceo-openai\nComments URL: https://news.ycombinator.com/item?id=44536988\nPoints: 944\n# Comments: 605",
+      "url": "https://www.theverge.com/openai/705999/google-windsurf-ceo-openai",
+      "published": "Fri, 11 Jul 2025 21:35:31 +0000",
+      "author": "rcchen",
+      "tags": [],
+      "fetched_at": "2025-07-12T20:21:55.882602"
+    },
+    {
+      "source": "RSS - Hacker News Best",
+      "title": "ETH Zurich and EPFL to release a LLM developed on public infrastructure",
+      "description": "Article URL: https://ethz.ch/en/news-and-events/eth-news/news/2025/07/a-language-model-built-for-the-public-good.html\nComments URL: https://news.ycombinator.com/item?id=44535637\nPoints: 642\n# Comments: 90",
+      "url": "https://ethz.ch/en/news-and-events/eth-news/news/2025/07/a-language-model-built-for-the-public-good.html",
+      "published": "Fri, 11 Jul 2025 18:45:10 +0000",
+      "author": "andy99",
+      "tags": [],
+      "fetched_at": "2025-07-12T20:21:55.882740"
+    },
+    {
+      "source": "RSS - Hacker News Best",
+      "title": "At Least 13 People Died by Suicide Amid U.K. Post Office Scandal, Report Says",
+      "description": "Article URL: https://www.nytimes.com/2025/07/10/world/europe/uk-post-office-scandal-report.html\nComments URL: https://news.ycombinator.com/item?id=44531120\nPoints: 648\n# Comments: 542",
+      "url": "https://www.nytimes.com/2025/07/10/world/europe/uk-post-office-scandal-report.html",
+      "published": "Fri, 11 Jul 2025 11:56:19 +0000",
+      "author": "xbryanx",
+      "tags": [],
+      "fetched_at": "2025-07-12T20:21:55.882877"
+    },
+    {
+      "source": "RSS - Hacker News Best",
+      "title": "Grok: Searching X for \"From:Elonmusk (Israel or Palestine or Hamas or Gaza)\"",
+      "description": "Article URL: https://simonwillison.net/2025/Jul/11/grok-musk/\nComments URL: https://news.ycombinator.com/item?id=44527190\nPoints: 693\n# Comments: 510",
+      "url": "https://simonwillison.net/2025/Jul/11/grok-musk/",
+      "published": "Fri, 11 Jul 2025 00:22:43 +0000",
+      "author": "simonw",
+      "tags": [],
+      "fetched_at": "2025-07-12T20:21:55.883099"
+    }
+  ],
+  "predictions": [
+    {
+      "source": "Manifold Markets",
+      "id": "Cs99hNSLSp",
+      "title": "Bloomberg Odd Lots with Josh Wolfe: Will the field of Robotics have its \"ChatGPT moment\" by December 31, 2025?",
+      "slug": "bloomberg-odd-lots-with-josh-wolfe-ZNOgOCOSZO",
+      "url": "https://manifold.markets/TheNotTooDistantFuture/bloomberg-odd-lots-with-josh-wolfe-ZNOgOCOSZO",
+      "probability": "7%",
+      "probability_raw": 0.07414322212857301,
+      "pool_total": 398828.31727235403,
+      "pool_total_display": "$398,828",
+      "pool_yes": "$356,322",
+      "pool_no": "$42,506",
+      "volume": 9129171.619309284,
+      "total_liquidity": 100000,
+      "unique_bettors": 101,
+      "creator_name": "The Not Too Distant Future",
+      "creator_username": "TheNotTooDistantFuture",
+      "close_date": "2026-01-01",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "BcJbQTDX1rdmaLYGKUOz",
+      "title": "Will an AI get gold on any International Math Olympiad by the end of 2025?",
+      "slug": "will-an-ai-get-gold-on-any-internat",
+      "url": "https://manifold.markets/Austin/will-an-ai-get-gold-on-any-internat",
+      "probability": "50%",
+      "probability_raw": 0.5018860650541636,
+      "pool_total": 187460.09998648765,
+      "pool_total_display": "$187,460",
+      "pool_yes": "$118,783",
+      "pool_no": "$68,677",
+      "volume": 4997772.801419193,
+      "total_liquidity": 102974.82783691247,
+      "unique_bettors": 2940,
+      "creator_name": "Austin",
+      "creator_username": "Austin",
+      "close_date": "2026-01-01",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "tEOg8OutsQ",
+      "title": "Federal AI preemption provision passes by July 14, 2025?",
+      "slug": "federal-ai-preemption-provision-pas",
+      "url": "https://manifold.markets/Austin/federal-ai-preemption-provision-pas",
+      "probability": "0%",
+      "probability_raw": 0.009266964090775445,
+      "pool_total": 84165.15594375893,
+      "pool_total_display": "$84,165",
+      "pool_yes": "$81,296",
+      "pool_no": "$2,869",
+      "volume": 122054.63738531798,
+      "total_liquidity": 6000,
+      "unique_bettors": 60,
+      "creator_name": "Austin",
+      "creator_username": "Austin",
+      "close_date": "2025-07-13",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "4gdkzbfvtt",
+      "title": "Will Ukraine and Russia reach a ceasefire -- in agreement or in practice -- by August 2025? 🇷🇺⚔️🇺🇦",
+      "slug": "will-ukraine-and-russia-reach-a-cea",
+      "url": "https://manifold.markets/Moscow25/will-ukraine-and-russia-reach-a-cea",
+      "probability": "2%",
+      "probability_raw": 0.02433237714133009,
+      "pool_total": 80293.9925247322,
+      "pool_total_display": "$80,294",
+      "pool_yes": "$76,849",
+      "pool_no": "$3,445",
+      "volume": 152623.8747638881,
+      "total_liquidity": 10500,
+      "unique_bettors": 196,
+      "creator_name": "Niko",
+      "creator_username": "Moscow25",
+      "close_date": "2025-08-01",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "tu2ouer9zq",
+      "title": "Will an AI win a gold medal on International Math Olympiad (IMO) 2025?",
+      "slug": "will-an-ai-win-a-gold-medal-on-imo",
+      "url": "https://manifold.markets/jack/will-an-ai-win-a-gold-medal-on-imo",
+      "probability": "38%",
+      "probability_raw": 0.3865748382043902,
+      "pool_total": 22586.73355275936,
+      "pool_total_display": "$22,587",
+      "pool_yes": "$13,680",
+      "pool_no": "$8,907",
+      "volume": 299035.19772555074,
+      "total_liquidity": 11000,
+      "unique_bettors": 348,
+      "creator_name": "Jack",
+      "creator_username": "jack",
+      "close_date": "2025-08-20",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "A319ydGB1B7f4PMOROL3",
+      "title": "In early 2028, will an AI be able to generate a full high-quality movie to a prompt?",
+      "slug": "in-2028-will-an-ai-be-able-to-gener",
+      "url": "https://manifold.markets/ScottAlexander/in-2028-will-an-ai-be-able-to-gener",
+      "probability": "37%",
+      "probability_raw": 0.37000000000000005,
+      "pool_total": 21590.797504405087,
+      "pool_total_display": "$21,591",
+      "pool_yes": "$11,105",
+      "pool_no": "$10,486",
+      "volume": 9882712.917715399,
+      "total_liquidity": 10915,
+      "unique_bettors": 3844,
+      "creator_name": "Scott Alexander",
+      "creator_username": "ScottAlexander",
+      "close_date": "2028-01-02",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "NgURyZnsZt",
+      "title": "Daily Coinflip",
+      "slug": "daily-coinflip-cSsAL0RdqP",
+      "url": "https://manifold.markets/Traveel/daily-coinflip-cSsAL0RdqP",
+      "probability": "50%",
+      "probability_raw": 0.5064417811395971,
+      "pool_total": 20001.660068434296,
+      "pool_total_display": "$20,002",
+      "pool_yes": "$9,872",
+      "pool_no": "$10,130",
+      "volume": 1481.211781007944,
+      "total_liquidity": 10000,
+      "unique_bettors": 19,
+      "creator_name": "Traveel",
+      "creator_username": "Traveel",
+      "close_date": "2025-07-13",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "nOXCmJFNsLx08PjOc4Qk",
+      "title": "In 2028, will AI be at least as big a political issue as abortion?",
+      "slug": "in-2028-will-ai-be-at-least-as-big",
+      "url": "https://manifold.markets/ScottAlexander/in-2028-will-ai-be-at-least-as-big",
+      "probability": "74%",
+      "probability_raw": 0.74,
+      "pool_total": 12189.751371276801,
+      "pool_total_display": "$12,190",
+      "pool_yes": "$2,371",
+      "pool_no": "$9,819",
+      "volume": 1626122.67636894,
+      "total_liquidity": 5540,
+      "unique_bettors": 2350,
+      "creator_name": "Scott Alexander",
+      "creator_username": "ScottAlexander",
+      "close_date": "2028-01-02",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "VPhhCbZ5S8zj4owac8As",
+      "title": "Will we get AGI before 2026?",
+      "slug": "will-we-get-agi-before-2026-3d9bfaa96a61",
+      "url": "https://manifold.markets/RemNi/will-we-get-agi-before-2026-3d9bfaa96a61",
+      "probability": "3%",
+      "probability_raw": 0.0339889559924281,
+      "pool_total": 4982.065025510353,
+      "pool_total_display": "$4,982",
+      "pool_yes": "$4,103",
+      "pool_no": "$879",
+      "volume": 252944.39764905124,
+      "total_liquidity": 1120,
+      "unique_bettors": 330,
+      "creator_name": "RemNi",
+      "creator_username": "RemNi",
+      "close_date": "2026-03-01",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    },
+    {
+      "source": "Manifold Markets",
+      "id": "CShInSR85Z",
+      "title": "Bitcoin closes above $111K on July 16?",
+      "slug": "bitcoin-closes-above-111k-on-july-1",
+      "url": "https://manifold.markets/predyx_markets/bitcoin-closes-above-111k-on-july-1",
+      "probability": "91%",
+      "probability_raw": 0.9178257105298111,
+      "pool_total": 3641.261855252958,
+      "pool_total_display": "$3,641",
+      "pool_yes": "$299",
+      "pool_no": "$3,342",
+      "volume": 8149.42448871912,
+      "total_liquidity": 1000,
+      "unique_bettors": 50,
+      "creator_name": "PREDYX",
+      "creator_username": "predyx_markets",
+      "close_date": "2025-07-17",
+      "days_since_last_bet": 0,
+      "outcome_type": "BINARY",
+      "description": "No description",
+      "fetched_at": "2025-07-12T20:21:56.992866"
+    }
+  ]
+}
