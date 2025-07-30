@@ -1,0 +1,46 @@
+{
+  "labels": [
+    "Python",
+    "TypeScript",
+    "Markdown",
+    "Go"
+  ],
+  "datasets": [
+    {
+      "label": "GitHub Trending Languages",
+      "data": [
+        3,
+        3,
+        1,
+        1
+      ],
+      "backgroundColor": [
+        "#3572A5",
+        "#F1E05A",
+        "#00ADD8",
+        "#DEA584",
+        "#89E051",
+        "#B07219",
+        "#CCCCCC"
+      ],
+      "hoverData": [
+        {
+          "total_stars": 59734,
+          "stars_today": 4373
+        },
+        {
+          "total_stars": 69294,
+          "stars_today": 682
+        },
+        {
+          "total_stars": 57833,
+          "stars_today": 352
+        },
+        {
+          "total_stars": 5890,
+          "stars_today": 303
+        }
+      ]
+    }
+  ]
+}

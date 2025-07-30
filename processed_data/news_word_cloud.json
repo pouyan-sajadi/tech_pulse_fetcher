@@ -1,0 +1,135 @@
+{
+  "word_cloud": [
+    {
+      "text": "Ramp",
+      "value": 8
+    },
+    {
+      "text": "valuation",
+      "value": 7
+    },
+    {
+      "text": "AI-powered",
+      "value": 8
+    },
+    {
+      "text": "Meta",
+      "value": 7
+    },
+    {
+      "text": "CapCut",
+      "value": 5
+    },
+    {
+      "text": "short-form video",
+      "value": 5
+    },
+    {
+      "text": "Still Bright",
+      "value": 6
+    },
+    {
+      "text": "copper costs",
+      "value": 5
+    },
+    {
+      "text": "PlayerZero",
+      "value": 6
+    },
+    {
+      "text": "AI agents",
+      "value": 8
+    },
+    {
+      "text": "cyberattack",
+      "value": 7
+    },
+    {
+      "text": "Google",
+      "value": 9
+    },
+    {
+      "text": "AI age estimation",
+      "value": 8
+    },
+    {
+      "text": "AirTag",
+      "value": 4
+    },
+    {
+      "text": "Skechers",
+      "value": 4
+    },
+    {
+      "text": "DJI",
+      "value": 6
+    },
+    {
+      "text": "Amflow e-bike",
+      "value": 5
+    },
+    {
+      "text": "Copilot smart mode",
+      "value": 7
+    },
+    {
+      "text": "GPT-5",
+      "value": 9
+    },
+    {
+      "text": "OpenAI",
+      "value": 8
+    },
+    {
+      "text": "ChatGPT",
+      "value": 7
+    },
+    {
+      "text": "Study Mode",
+      "value": 5
+    },
+    {
+      "text": "Online Safety Act",
+      "value": 5
+    },
+    {
+      "text": "EPA",
+      "value": 4
+    },
+    {
+      "text": "climate regulations",
+      "value": 6
+    },
+    {
+      "text": "AI Hype Index",
+      "value": 5
+    }
+  ],
+  "hot_topics": [
+    {
+      "topic": "Ramp's Increasing Valuation",
+      "summary": "Ramp's valuation rapidly increased from $16B to $22.5B, showcasing a growing financial footprint driven by AI prospects.",
+      "trend": "rising"
+    },
+    {
+      "topic": "Google AI Age Verification",
+      "summary": "Google's rollout of AI age verification aims to secure online spaces from underage access, especially highlighted in the US and UK.",
+      "trend": "rising"
+    },
+    {
+      "topic": "OpenAI's Expansion in Education",
+      "summary": "OpenAI is launching ChatGPT's Study Mode targeting AI integration in academic settings, aiming for an educational shift.",
+      "trend": "rising"
+    },
+    {
+      "topic": "AI-Powered Future of Companies",
+      "summary": "Multiple tech firms like PlayerZero and Microsoft are advancing AI applications, signifying a broad industry focus on AI.",
+      "trend": "rising"
+    },
+    {
+      "topic": "Cybersecurity Concerns",
+      "summary": "Saint Paul's cyberattack highlights the rising need for robust cybersecurity measures as digital attacks target public services.",
+      "trend": "rising"
+    }
+  ]
+}

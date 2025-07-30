@@ -186,42 +186,44 @@ class TechPulseFetcher:
             articles = soup.find_all('article', class_='Box-row', limit=limit)
             
             for article in articles:
-                # Extract repository info
                 h2 = article.find('h2', class_='h3')
                 if not h2:
                     continue
-                    
+                
                 repo_link = h2.find('a')
                 repo_name = repo_link.get('href', '').strip('/')
                 
-                # Get description
                 description_p = article.find('p', class_='col-9')
                 description = description_p.text.strip() if description_p else 'No description'
                 
-                # Get language
                 language_span = article.find('span', itemprop='programmingLanguage')
                 language = language_span.text.strip() if language_span else 'Unknown'
                 
-                # Get stars and forks
-                stats = article.find_all('a', class_='Link--muted')
+                # --- REVISED STAR EXTRACTION ---
+                
+                # Find the link to stargazers for total stars
+                # The href is relative, so it looks like /user/repo/stargazers
+                star_link = article.find('a', href=f"{repo_link.get('href')}/stargazers")
                 stars = 0
-                stars_today = 0
-                
-                for stat in stats:
-                    text = stat.text.strip()
-                    if 'star' in text.lower():
-                        stars_text = text.replace(',', '').split()[0]
+                if star_link:
+                    star_text = star_link.text.strip().replace(',', '')
+                    if 'k' in star_text.lower():
+                        stars = int(float(star_text.lower().replace('k', '')) * 1000)
+                    else:
                         try:
-                            stars = int(stars_text)
-                        except:
+                            stars = int(star_text)
+                        except ValueError:
                             stars = 0
-                
-                # Get stars today (if available)
-                star_today_span = article.find('span', class_='d-inline-block')
-                if star_today_span and 'stars today' in star_today_span.text:
+
+                # Find the span for stars today
+                stars_today = 0
+                # The "stars today" element is usually a span at the end of the row
+                stars_today_span = article.find('span', class_='d-inline-block float-sm-right')
+                if stars_today_span and 'stars today' in stars_today_span.text:
                     try:
-                        stars_today = int(star_today_span.text.split()[0].replace(',', ''))
-                    except:
+                        stars_today_text = stars_today_span.text.strip().split()[0].replace(',', '')
+                        stars_today = int(stars_today_text)
+                    except (ValueError, IndexError):
                         stars_today = 0
                 
                 repos.append({
@@ -599,13 +601,18 @@ class TechPulseFetcher:
         
         return results
 
-    def save_to_json(self, data: Dict, filename: str = 'tech_pulse_data.json'):
+    def save_to_json(self, data: Dict, filename: str):
         """
-        Save fetched data to JSON file
+        Save fetched data to a JSON file in the fetched_data directory.
         """
-        with open(filename, 'w', encoding='utf-8') as f:
+        # Ensure the directory exists
+        os.makedirs('fetched_data', exist_ok=True)
+        
+        filepath = os.path.join('fetched_data', filename)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"\n💾 Data saved to {filename}")
+        print(f"\n💾 Data saved to {filepath}")
 
     def print_summary(self, data: Dict):
         """
@@ -643,8 +650,8 @@ class TechPulseFetcher:
             print("\n🔮 Prediction Markets:")
             for i, market in enumerate(predictions[:3], 1):
                 print(f"{i}. {market['title'][:70]}{'...' if len(market['title']) > 70 else ''}")
-                print(f"   📊 {market['probability']} chance | 💰 Pool: {market['pool_total']} | 👥 {market['unique_bettors']} bettors")
-                print(f"   📈 24h Volume: ${market['volume_24h']:,.0f} | ⏰ Closes: {market['close_date']}")
+                print(f"   📊 {market['probability']} chance | 💰 Pool: {market.get('pool_total_display', market.get('pool_total', 'N/A'))} | 👥 {market.get('unique_bettors', 'N/A')} bettors")
+                print(f"   📈 Volume: ${market.get('volume', 0):,.0f} | ⏰ Closes: {market.get('close_date', 'N/A')}")
         
         
         print("\n" + "="*50)
@@ -690,7 +697,7 @@ if __name__ == "__main__":
     fetcher.print_summary(data)
     
     # Print file locations
-    print("\n📁 Data files created:")
+    print("\n📁 Data files created in 'fetched_data' directory:")
     print("  - tech_pulse_all.json (complete dataset)")
     print("  - product_hunt_data.json")
     print("  - github_trending_data.json") 

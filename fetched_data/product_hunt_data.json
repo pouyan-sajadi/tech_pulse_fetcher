@@ -1,0 +1,245 @@
+[
+  {
+    "source": "Product Hunt",
+    "title": "Wordware",
+    "tagline": "Your tool for building AI agents with natural language",
+    "description": "Wordware is an IDE that enables anyone to build complex AI Agents and applications. Domain experts and engineers can now iterate 20x faster with prebuilt tools, API deployment, tracing, and more. Finally, build high-quality and reliable AI!",
+    "url": "https://www.producthunt.com/products/wordware?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/MATA3V5MZCDNLR?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 16367,
+    "comments": 137,
+    "topics": [
+      "Software Engineering",
+      "Developer Tools",
+      "Artificial Intelligence"
+    ],
+    "makers": [
+      "[REDACTED]",
+      "[REDACTED]",
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2024-08-02T07:01:00Z",
+    "featured_at": "2024-08-02T07:01:00Z",
+    "fetched_at": "2025-07-30T10:54:08.797123"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Slack",
+    "tagline": "Be less busy. Real-time messaging, archiving & search.",
+    "description": "Slack is a collaboration hub for work, no matter what work you do. It’s a place where conversations happen, decisions are made, and information is always at your fingertips. With Slack, your team is better connected.",
+    "url": "https://www.producthunt.com/products/slack?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/1ca95d917f?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 13209,
+    "comments": 300,
+    "topics": [
+      "Android",
+      "iOS",
+      "Mac",
+      "Web App",
+      "Productivity",
+      "Messaging",
+      "API",
+      "Developer Tools",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2013-12-03T18:11:40Z",
+    "featured_at": "2013-12-03T18:11:40Z",
+    "fetched_at": "2025-07-30T10:54:08.797134"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Startup Stash",
+    "tagline": "A curated directory of 400 resources & tools for startups",
+    "description": "Startup Stash is a curated directory of resources and tools to help you build your startup. It includes 400 products in 40 categories, like for example: Idea Generation, Early users, Marketing, Raising Capital and Customer support. Each category consists of 10 handpicked resources and tools, all with their own detail page that displays some info about the product.",
+    "url": "https://www.producthunt.com/products/startup-stash?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/ff85b1307e38ee?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 9341,
+    "comments": 321,
+    "topics": [
+      "Web App",
+      "Tech",
+      "Startup Lessons"
+    ],
+    "makers": [
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2015-02-25T09:28:06Z",
+    "featured_at": "2015-02-25T09:28:06Z",
+    "fetched_at": "2025-07-30T10:54:08.797139"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "remove.bg",
+    "tagline": "Remove the background of any image 100% automatically",
+    "description": "Remove.bg removes the background of any photo 100% automatically: You don't have to manually select the background/foreground layers to separate them - just select your image and instantly download the result image with the background removed!",
+    "url": "https://www.producthunt.com/products/remove-bg?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/8eaf923bc275d3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 8032,
+    "comments": 428,
+    "topics": [
+      "Design Tools",
+      "Productivity",
+      "Photography"
+    ],
+    "makers": [
+      "[REDACTED]",
+      "[REDACTED]",
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2018-12-17T09:14:00Z",
+    "featured_at": "2018-12-17T09:14:00Z",
+    "fetched_at": "2025-07-30T10:54:08.797143"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Notion 2.0",
+    "tagline": "The all-in-one workspace - notes, tasks, wikis, & databases",
+    "description": "Notion is the all-in-one workspace. From notes, tasks, wikis, to database, Notion is all you need. Works great for teams and individuals. Available in the browser, iOS, Mac, and Windows.",
+    "url": "https://www.producthunt.com/products/notion?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/ef60ed2cbd2dd2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 7757,
+    "comments": 312,
+    "topics": [
+      "Productivity",
+      "Notes",
+      "Spreadsheets",
+      "Notion"
+    ],
+    "makers": [],
+    "hunter": "[REDACTED]",
+    "created_at": "2018-03-20T07:32:45Z",
+    "featured_at": "2018-03-20T07:32:45Z",
+    "fetched_at": "2025-07-30T10:54:08.797146"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Hotjar",
+    "tagline": "See how visitors are using your site and get visual feedback",
+    "description": "Hotjar is a new and easy way to truly understand your web and mobile site visitors. Find your hottest opportunities for growth today.",
+    "url": "https://www.producthunt.com/products/hotjar?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/65080cfb09a071?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 5808,
+    "comments": 153,
+    "topics": [
+      "Web App",
+      "Analytics",
+      "SaaS",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2015-07-28T12:12:28Z",
+    "featured_at": "2015-07-28T12:12:28Z",
+    "fetched_at": "2025-07-30T10:54:08.797149"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Startup Pitch Decks",
+    "tagline": "Real decks from real startups that raised over $400M",
+    "description": "Real decks from real startups that raised over $400M",
+    "url": "https://www.producthunt.com/products/attach?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/34733a777291ef?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 5660,
+    "comments": 153,
+    "topics": [
+      "Web App",
+      "Productivity",
+      "Marketing",
+      "Venture Capital",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2016-09-06T07:04:41Z",
+    "featured_at": "2016-09-06T07:04:41Z",
+    "fetched_at": "2025-07-30T10:54:08.797153"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Bubble",
+    "tagline": "Build a fully functional web app without any code",
+    "description": "Bubble is web development framework and a visual programming tool. It enables non-technical people to build production-ready web and mobile apps without code.",
+    "url": "https://www.producthunt.com/products/bubble?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/05cb9cf45f3c3a?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 5563,
+    "comments": 148,
+    "topics": [
+      "Web App",
+      "Design Tools",
+      "Productivity",
+      "SaaS",
+      "Software Engineering",
+      "Developer Tools",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]",
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2015-10-05T11:54:13Z",
+    "featured_at": "2015-10-05T11:54:13Z",
+    "fetched_at": "2025-07-30T10:54:08.797163"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "monday.com",
+    "tagline": "Improve collaboration & teamwork in one central hub",
+    "description": "monday.com is a centralized platform for teams to manage every detail of their work, from high-level roadmap planning to the specifics of day-to-day tasks, while building a culture of transparency.",
+    "url": "https://www.producthunt.com/products/monday-com?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/ba7d50c068?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 5413,
+    "comments": 33,
+    "topics": [
+      "Productivity",
+      "Task Management",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]",
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2014-06-24T16:48:54Z",
+    "featured_at": "2014-06-24T16:48:54Z",
+    "fetched_at": "2025-07-30T10:54:08.797168"
+  },
+  {
+    "source": "Product Hunt",
+    "title": "Open Peeps",
+    "tagline": "A hand-drawn illustration library.",
+    "description": "Open Peeps is a hand-drawn illustration library—a system of doodles. You can use them in product, marketing, comics, product states, user flows, personas, storyboarding, quinceañera invitations, or whatever you want! Available in Sketch, Studio, Figma, and XD",
+    "url": "https://www.producthunt.com/products/open-peeps?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "website": "https://www.producthunt.com/r/5caa5b52b54a9c?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+    "votes": 5347,
+    "comments": 178,
+    "topics": [
+      "Design Tools",
+      "Productivity",
+      "Art",
+      "User Experience",
+      "Social Media",
+      "Marketing",
+      "Party",
+      "Tech"
+    ],
+    "makers": [
+      "[REDACTED]"
+    ],
+    "hunter": "[REDACTED]",
+    "created_at": "2020-02-24T08:15:00Z",
+    "featured_at": "2020-02-24T08:15:00Z",
+    "fetched_at": "2025-07-30T10:54:08.797172"
+  }
+]

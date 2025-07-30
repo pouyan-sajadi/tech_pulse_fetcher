@@ -1,0 +1,102 @@
+[
+  {
+    "source": "GitHub Trending",
+    "title": "9001/copyparty",
+    "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file, no deps",
+    "url": "https://github.com/9001/copyparty",
+    "language": "Python",
+    "stars": 13243,
+    "stars_today": 3561,
+    "fetched_at": "2025-07-30T10:54:10.091113"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "roboflow/supervision",
+    "description": "We write your reusable computer vision tools. 💜",
+    "url": "https://github.com/roboflow/supervision",
+    "language": "Python",
+    "stars": 31899,
+    "stars_today": 797,
+    "fetched_at": "2025-07-30T10:54:10.091221"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "outline/outline",
+    "description": "The fastest knowledge base for growing teams. Beautiful, realtime collaborative, feature packed, and markdown compatible.",
+    "url": "https://github.com/outline/outline",
+    "language": "TypeScript",
+    "stars": 33639,
+    "stars_today": 259,
+    "fetched_at": "2025-07-30T10:54:10.091342"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "linshenkx/prompt-optimizer",
+    "description": "一款提示词优化器，助力于编写高质量的提示词",
+    "url": "https://github.com/linshenkx/prompt-optimizer",
+    "language": "TypeScript",
+    "stars": 11349,
+    "stars_today": 393,
+    "fetched_at": "2025-07-30T10:54:10.091436"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "tldr-pages/tldr",
+    "description": "📚 Collaborative cheatsheets for console commands",
+    "url": "https://github.com/tldr-pages/tldr",
+    "language": "Markdown",
+    "stars": 57833,
+    "stars_today": 352,
+    "fetched_at": "2025-07-30T10:54:10.091529"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "mikf/gallery-dl",
+    "description": "Command-line program to download image galleries and collections from several image hosting sites",
+    "url": "https://github.com/mikf/gallery-dl",
+    "language": "Python",
+    "stars": 14592,
+    "stars_today": 15,
+    "fetched_at": "2025-07-30T10:54:10.091622"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "sindresorhus/awesome",
+    "description": "😎 Awesome lists about all kinds of interesting topics",
+    "url": "https://github.com/sindresorhus/awesome",
+    "language": "Unknown",
+    "stars": 387123,
+    "stars_today": 485,
+    "fetched_at": "2025-07-30T10:54:10.091740"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "ashishpatel26/500-AI-Agents-Projects",
+    "description": "The 500 AI Agents Projects is a curated collection of AI agent use cases across various industries. It showcases practical applications and provides links to open-source projects for implementation, illustrating how AI agents are transforming sectors such as healthcare, finance, education, retail, and more.",
+    "url": "https://github.com/ashishpatel26/500-AI-Agents-Projects",
+    "language": "Unknown",
+    "stars": 3994,
+    "stars_today": 684,
+    "fetched_at": "2025-07-30T10:54:10.091833"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "cloudwego/eino",
+    "description": "The ultimate LLM/AI application development framework in Golang.",
+    "url": "https://github.com/cloudwego/eino",
+    "language": "Go",
+    "stars": 5890,
+    "stars_today": 303,
+    "fetched_at": "2025-07-30T10:54:10.091927"
+  },
+  {
+    "source": "GitHub Trending",
+    "title": "mattermost-community/focalboard",
+    "description": "Focalboard is an open source, self-hosted alternative to Trello, Notion, and Asana.",
+    "url": "https://github.com/mattermost-community/focalboard",
+    "language": "TypeScript",
+    "stars": 24306,
+    "stars_today": 30,
+    "fetched_at": "2025-07-30T10:54:10.092021"
+  }
+]
