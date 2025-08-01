@@ -1,135 +1,61 @@
 {
   "word_cloud": [
     {
-      "text": "Ramp",
-      "value": 8
+      "text": "google",
+      "value": 80
     },
     {
-      "text": "valuation",
-      "value": 7
+      "text": "technology",
+      "value": 75
     },
     {
-      "text": "AI-powered",
-      "value": 8
+      "text": "gpt",
+      "value": 70
     },
     {
-      "text": "Meta",
-      "value": 7
+      "text": "openai",
+      "value": 70
     },
     {
-      "text": "CapCut",
-      "value": 5
-    },
-    {
-      "text": "short-form video",
-      "value": 5
-    },
-    {
-      "text": "Still Bright",
-      "value": 6
-    },
-    {
-      "text": "copper costs",
-      "value": 5
-    },
-    {
-      "text": "PlayerZero",
-      "value": 6
-    },
-    {
-      "text": "AI agents",
-      "value": 8
+      "text": "safety",
+      "value": 65
     },
     {
       "text": "cyberattack",
-      "value": 7
+      "value": 60
     },
     {
-      "text": "Google",
-      "value": 9
+      "text": "app",
+      "value": 55
     },
     {
-      "text": "AI age estimation",
-      "value": 8
+      "text": "video",
+      "value": 55
     },
     {
-      "text": "AirTag",
-      "value": 4
+      "text": "company",
+      "value": 50
     },
     {
-      "text": "Skechers",
-      "value": 4
-    },
-    {
-      "text": "DJI",
-      "value": 6
-    },
-    {
-      "text": "Amflow e-bike",
-      "value": 5
-    },
-    {
-      "text": "Copilot smart mode",
-      "value": 7
-    },
-    {
-      "text": "GPT-5",
-      "value": 9
-    },
-    {
-      "text": "OpenAI",
-      "value": 8
-    },
-    {
-      "text": "ChatGPT",
-      "value": 7
-    },
-    {
-      "text": "Study Mode",
-      "value": 5
-    },
-    {
-      "text": "Online Safety Act",
-      "value": 5
-    },
-    {
-      "text": "EPA",
-      "value": 4
-    },
-    {
-      "text": "climate regulations",
-      "value": 6
-    },
-    {
-      "text": "AI Hype Index",
-      "value": 5
+      "text": "online",
+      "value": 50
     }
   ],
   "hot_topics": [
     {
-      "topic": "Ramp's Increasing Valuation",
-      "summary": "Ramp's valuation rapidly increased from $16B to $22.5B, showcasing a growing financial footprint driven by AI prospects.",
+      "topic": "AI and Machine Learning",
+      "summary": "Discusses advancements in AI, particularly focusing on GPT and companies like OpenAI.",
       "trend": "rising"
     },
     {
-      "topic": "Google AI Age Verification",
-      "summary": "Google's rollout of AI age verification aims to secure online spaces from underage access, especially highlighted in the US and UK.",
+      "topic": "Cybersecurity",
+      "summary": "Covers recent cyberattacks and their impact on public services.",
       "trend": "rising"
     },
     {
-      "topic": "OpenAI's Expansion in Education",
-      "summary": "OpenAI is launching ChatGPT's Study Mode targeting AI integration in academic settings, aiming for an educational shift.",
-      "trend": "rising"
-    },
-    {
-      "topic": "AI-Powered Future of Companies",
-      "summary": "Multiple tech firms like PlayerZero and Microsoft are advancing AI applications, signifying a broad industry focus on AI.",
-      "trend": "rising"
-    },
-    {
-      "topic": "Cybersecurity Concerns",
-      "summary": "Saint Paul's cyberattack highlights the rising need for robust cybersecurity measures as digital attacks target public services.",
-      "trend": "rising"
+      "topic": "Tech Industry Developments",
+      "summary": "New apps and technological advancements are influencing various sectors.",
+      "trend": "stable"
     }
   ]
 }

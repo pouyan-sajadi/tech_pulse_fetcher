@@ -1,0 +1,65 @@
+{
+  "nodes": [
+    {
+      "node": 0,
+      "name": "AI/ML"
+    },
+    {
+      "node": 1,
+      "name": "Developer Tools"
+    },
+    {
+      "node": 2,
+      "name": "Productivity"
+    },
+    {
+      "node": 3,
+      "name": "Design"
+    },
+    {
+      "node": 4,
+      "name": "Marketing & Sales"
+    },
+    {
+      "node": 5,
+      "name": "Finance"
+    },
+    {
+      "node": 6,
+      "name": "Education"
+    },
+    {
+      "node": 7,
+      "name": "Health & Fitness"
+    },
+    {
+      "node": 8,
+      "name": "Gaming"
+    },
+    {
+      "node": 9,
+      "name": "Hardware"
+    },
+    {
+      "node": 10,
+      "name": "Security"
+    },
+    {
+      "node": 11,
+      "name": "Social"
+    },
+    {
+      "node": 12,
+      "name": "Data & Analytics"
+    },
+    {
+      "node": 13,
+      "name": "No-Code/Low-Code"
+    },
+    {
+      "node": 14,
+      "name": "Other"
+    }
+  ],
+  "links": []
+}
