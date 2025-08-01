@@ -26,19 +26,83 @@
       "hoverData": [
         {
           "total_stars": 59734,
-          "stars_today": 4373
+          "stars_today": 4373,
+          "repositories": [
+            {
+              "title": "9001/copyparty",
+              "description": "Portable file server with accelerated resumable uploads, dedup, WebDAV, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file, no deps",
+              "url": "https://github.com/9001/copyparty",
+              "stars": 13243,
+              "stars_today": 3561
+            },
+            {
+              "title": "roboflow/supervision",
+              "description": "We write your reusable computer vision tools. \ud83d\udc9c",
+              "url": "https://github.com/roboflow/supervision",
+              "stars": 31899,
+              "stars_today": 797
+            },
+            {
+              "title": "mikf/gallery-dl",
+              "description": "Command-line program to download image galleries and collections from several image hosting sites",
+              "url": "https://github.com/mikf/gallery-dl",
+              "stars": 14592,
+              "stars_today": 15
+            }
+          ]
         },
         {
           "total_stars": 69294,
-          "stars_today": 682
+          "stars_today": 682,
+          "repositories": [
+            {
+              "title": "outline/outline",
+              "description": "The fastest knowledge base for growing teams. Beautiful, realtime collaborative, feature packed, and markdown compatible.",
+              "url": "https://github.com/outline/outline",
+              "stars": 33639,
+              "stars_today": 259
+            },
+            {
+              "title": "linshenkx/prompt-optimizer",
+              "description": "\u4e00\u6b3e\u63d0\u793a\u8bcd\u4f18\u5316\u5668\uff0c\u52a9\u529b\u4e8e\u7f16\u5199\u9ad8\u8d28\u91cf\u7684\u63d0\u793a\u8bcd",
+              "url": "https://github.com/linshenkx/prompt-optimizer",
+              "stars": 11349,
+              "stars_today": 393
+            },
+            {
+              "title": "mattermost-community/focalboard",
+              "description": "Focalboard is an open source, self-hosted alternative to Trello, Notion, and Asana.",
+              "url": "https://github.com/mattermost-community/focalboard",
+              "stars": 24306,
+              "stars_today": 30
+            }
+          ]
         },
         {
           "total_stars": 57833,
-          "stars_today": 352
+          "stars_today": 352,
+          "repositories": [
+            {
+              "title": "tldr-pages/tldr",
+              "description": "\ud83d\udcda Collaborative cheatsheets for console commands",
+              "url": "https://github.com/tldr-pages/tldr",
+              "stars": 57833,
+              "stars_today": 352
+            }
+          ]
         },
         {
           "total_stars": 5890,
-          "stars_today": 303
+          "stars_today": 303,
+          "repositories": [
+            {
+              "title": "cloudwego/eino",
+              "description": "The ultimate LLM/AI application development framework in Golang.",
+              "url": "https://github.com/cloudwego/eino",
+              "stars": 5890,
+              "stars_today": 303
+            }
+          ]
         }
       ]
     }

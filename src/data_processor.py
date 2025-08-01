@@ -5,7 +5,7 @@ from collections import Counter
 def process_github_trending():
     """
     Analyzes GitHub trending data to find the distribution of programming languages,
-    including total stars and stars today.
+    including total stars, stars today, and detailed repo info for frontend interaction.
     """
     try:
         with open('fetched_data/github_trending_data.json', 'r') as f:
@@ -25,16 +25,25 @@ def process_github_trending():
             language_stats[lang] = {
                 'repo_count': 0,
                 'total_stars': 0,
-                'stars_today': 0
+                'stars_today': 0,
+                'repositories': [] # Add list to store repo details
             }
         
         language_stats[lang]['repo_count'] += 1
         language_stats[lang]['total_stars'] += repo.get('stars', 0)
         language_stats[lang]['stars_today'] += repo.get('stars_today', 0)
+        # Append detailed repo info
+        language_stats[lang]['repositories'].append({
+            'title': repo.get('title'),
+            'description': repo.get('description'),
+            'url': repo.get('url'),
+            'stars': repo.get('stars'),
+            'stars_today': repo.get('stars_today')
+        })
 
     # Group less common languages into "Other"
     total_repos = len(github_data)
-    other_stats = {'repo_count': 0, 'total_stars': 0, 'stars_today': 0}
+    other_stats = {'repo_count': 0, 'total_stars': 0, 'stars_today': 0, 'repositories': []}
     final_languages = {}
 
     for lang, stats in language_stats.items():
@@ -42,6 +51,7 @@ def process_github_trending():
             other_stats['repo_count'] += stats['repo_count']
             other_stats['total_stars'] += stats['total_stars']
             other_stats['stars_today'] += stats['stars_today']
+            other_stats['repositories'].extend(stats['repositories'])
         else:
             final_languages[lang] = stats
 
@@ -58,7 +68,8 @@ def process_github_trending():
             "hoverData": [
                 {
                     'total_stars': stats['total_stars'],
-                    'stars_today': stats['stars_today']
+                    'stars_today': stats['stars_today'],
+                    'repositories': stats['repositories']
                 }
                 for stats in final_languages.values()
             ]
@@ -69,7 +80,7 @@ def process_github_trending():
     with open('processed_data/github_language_distribution.json', 'w') as f:
         json.dump(chart_data, f, indent=2)
 
-    print("Successfully processed GitHub trending data with star counts.")
+    print("Successfully processed GitHub trending data with detailed repo info.")
 
 import os
 import openai
@@ -193,19 +204,22 @@ def process_product_hunt_for_sankey():
         if not product_topics:
             continue
 
-        # Use LLM to map topics to core categories
         try:
             response = openai.chat.completions.create(
                 model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": f"You are a helpful assistant that maps product topics to a predefined list of core categories. Your response must be a JSON array of strings, where each string is one of the following categories: {', '.join(CORE_CATEGORIES)}. If a topic does not fit, map it to 'Other'."},
-                    {"role": "user", "content": f"Map the following topics to the core categories: {', '.join(product_topics)}"}
+                    {"role": "system", "content": f"You are a helpful assistant that rates the relevance of product topics to a predefined list of core categories. Your response must be a JSON object where keys are the categories and values are relevance scores from 1 to 10. The categories are: {', '.join(CORE_CATEGORIES)}."},
+                    {"role": "user", "content": f"Rate the relevance of the following topics to the core categories: {', '.join(product_topics)}"}
                 ],
                 response_format={ "type": "json_object" }
             )
-            mapped_categories = json.loads(response.choices[0].message.content.strip())
-            # Ensure mapped categories are valid and unique for this product
-            product_mapped_categories = list(set([cat for cat in mapped_categories if cat in CORE_CATEGORIES]))
+            relevance_scores = json.loads(response.choices[0].message.content.strip())
+            
+            # Sort categories by relevance and take the top 2
+            sorted_categories = sorted(relevance_scores.items(), key=lambda item: item[1], reverse=True)
+            product_mapped_categories = [cat for cat, score in sorted_categories[:2] if score > 3] # Only include if score is above a threshold
+
+            print(f"Product: {product.get('title')}, Mapped Categories: {product_mapped_categories}")
             all_mapped_categories.append(product_mapped_categories)
 
         except Exception as e:
@@ -219,26 +233,46 @@ def process_product_hunt_for_sankey():
         nodes.append({"node": i, "name": category})
         node_to_id[category] = i
 
-    # Build Sankey links (co-occurrence)
+    # Associate products with each category (node)
+    for i, node in enumerate(nodes):
+        node_name = node['name']
+        node['products'] = []
+        for product, mapped_cats in zip(product_hunt_data, all_mapped_categories):
+            if node_name in mapped_cats:
+                node['products'].append({
+                    'title': product.get('title'),
+                    'tagline': product.get('tagline')
+                })
+
+    # Build Sankey links (co-occurrence) and associate products with each link
     links = Counter()
-    for product_cats in all_mapped_categories:
+    link_products = {}
+
+    for product, product_cats in zip(product_hunt_data, all_mapped_categories):
         # Generate all unique pairs of categories within a product
         for i in range(len(product_cats)):
             for j in range(i + 1, len(product_cats)):
                 cat1 = product_cats[i]
                 cat2 = product_cats[j]
-                # Ensure consistent order for links (e.g., (A,B) not (B,A))
                 link_key = tuple(sorted((cat1, cat2)))
                 links[link_key] += 1
+                
+                if link_key not in link_products:
+                    link_products[link_key] = []
+                link_products[link_key].append({
+                    'title': product.get('title'),
+                    'tagline': product.get('tagline')
+                })
 
     sankey_links = []
     for (source_cat, target_cat), value in links.items():
-        # Only include links with a minimum co-occurrence to avoid clutter
-        if value > 1:
+        if value > 0: # Keep all links for interactivity
+            link_key = tuple(sorted((source_cat, target_cat)))
             sankey_links.append({
                 "source": node_to_id[source_cat],
                 "target": node_to_id[target_cat],
-                "value": value
+                "value": value,
+                "products": link_products.get(link_key, [])
             })
 
     sankey_data = {
@@ -252,7 +286,86 @@ def process_product_hunt_for_sankey():
     print("Successfully processed Product Hunt data for Sankey diagram.")
 
 
+def process_manifold_predictions_for_bubble_plot():
+    """
+    Analyzes Manifold Markets data to create data for a 2D scatter plot.
+    Uses LLM to categorize predictions.
+    """
+    try:
+        with open('fetched_data/predictions_data.json', 'r') as f:
+            predictions_data = json.load(f)
+    except FileNotFoundError:
+        print("Error: fetched_data/predictions_data.json not found.")
+        return
+
+    CORE_PREDICTION_CATEGORIES = [
+        "AI", "Blockchain/Crypto", "Science/Research", "Politics/Society",
+        "Economics/Finance", "Technology (General)", "Health", "Other"
+    ]
+
+    if not openai.api_key:
+        print("Error: OPENAI_API_KEY environment variable not set. Cannot process Manifold data with LLM.")
+        return
+
+    plot_data = []
+
+    print("Analyzing Manifold predictions for category using LLM...")
+    for prediction in predictions_data:
+        title = prediction.get('title', '')
+        description = prediction.get('description', '')
+        full_text = f"Title: {title}. Description: {description}"
+
+        try:
+            response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": f"You are a helpful assistant that categorizes prediction market questions into one of the following: {', '.join(CORE_PREDICTION_CATEGORIES)}. If a category is not suitable, use 'Other'. Your response must be a JSON object like {{'category': 'category_name'}}."},
+                    {"role": "user", "content": f"Categorize the following prediction: {full_text}"}
+                ],
+                response_format={ "type": "json_object" }
+            )
+            llm_output = json.loads(response.choices[0].message.content.strip())
+            category = llm_output.get('category', 'Other')
+            
+            if category not in CORE_PREDICTION_CATEGORIES:
+                category = "Other"
+
+            # New coordinate system based on user request
+            x_pos = prediction.get('probability_raw', 0.5)
+            y_pos = prediction.get('volume', 0)
+
+            plot_data.append({
+                "x": x_pos,
+                "y": y_pos,
+                "label": title,
+                "category": category,
+                "url": prediction.get('url', '') # Add URL for frontend
+            })
+
+        except Exception as e:
+            print(f"Error processing prediction '{title}': {e}")
+            plot_data.append({
+                "x": 0.5, "y": 0,
+                "label": title, "category": "Other"
+            })
+
+    # Structure for frontend
+    final_data = {
+        "datasets": [{
+            "label": "Manifold Predictions",
+            "data": plot_data
+        }],
+        "categories": CORE_PREDICTION_CATEGORIES
+    }
+
+    with open('processed_data/manifold_predictions_bubble_plot.json', 'w') as f:
+        json.dump(final_data, f, indent=2)
+
+    print("Successfully processed Manifold Markets data for scatter plot.")
+
+
 if __name__ == '__main__':
     process_github_trending()
     process_rss_feeds_for_wordcloud()
     process_product_hunt_for_sankey()
+    process_manifold_predictions_for_bubble_plot()

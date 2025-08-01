@@ -1,0 +1,89 @@
+{
+  "datasets": [
+    {
+      "label": "Manifold Predictions",
+      "data": [
+        {
+          "x": 0.15582594951008533,
+          "y": 493651.5648396918,
+          "label": "Will Jerome Powell cease to hold the office of Chair of the Federal Reserve before 2026?",
+          "category": "Economics/Finance",
+          "url": "https://manifold.markets/WalterMartin/will-jerome-powell-cease-to-hold-th"
+        },
+        {
+          "x": 0.21878953767361223,
+          "y": 61583.44334232147,
+          "label": "Will there be a bilateral ceasefire in the Russo-Ukraine conflict before 2026?",
+          "category": "Politics/Society",
+          "url": "https://manifold.markets/WalterMartin/will-there-be-a-bilateral-ceasefire-5z0zRtdl5P"
+        },
+        {
+          "x": 0.7290753461867281,
+          "y": 406995.15394195984,
+          "label": "Will Nvidia outperform the S&P 500 in 2025?",
+          "category": "Economics/Finance",
+          "url": "https://manifold.markets/WalterMartin/will-nvidia-outperform-the-sp-500-i"
+        },
+        {
+          "x": 0.5505816570694366,
+          "y": 99895.84157670548,
+          "label": "Tesla has more fully autonomous rides than Waymo in 2026?",
+          "category": "Technology (General)",
+          "url": "https://manifold.markets/JamesGrugett/tesla-serves-more-fully-autonomous"
+        },
+        {
+          "x": 0.5006423258456317,
+          "y": 847.3233853734151,
+          "label": "Daily Coinflip",
+          "category": "Other",
+          "url": "https://manifold.markets/Traveel/daily-coinflip-LOUU8d25Z0"
+        },
+        {
+          "x": 0.010097467907256288,
+          "y": 22416.672089204014,
+          "label": "Will Anthropic be acquired by another company before the end of 2025?",
+          "category": "AI",
+          "url": "https://manifold.markets/desku/will-anthropic-be-acquired-by-anoth"
+        },
+        {
+          "x": 0.04292861267275982,
+          "y": 97236.41908354106,
+          "label": "GPT-5 released by July 31st?",
+          "category": "AI",
+          "url": "https://manifold.markets/brod/gpt5-released-by-july-31st"
+        },
+        {
+          "x": 0.6900606913266946,
+          "y": 1729212.0325694454,
+          "label": "In 2028, will AI be at least as big a political issue as abortion?",
+          "category": "AI",
+          "url": "https://manifold.markets/ScottAlexander/in-2028-will-ai-be-at-least-as-big"
+        },
+        {
+          "x": 0.63,
+          "y": 238079.0920907523,
+          "label": "Will an AI achieve >85% performance on the FrontierMath benchmark before 2028?",
+          "category": "AI",
+          "url": "https://manifold.markets/MatthewBarnett/will-an-ai-achieve-85-performance-o"
+        },
+        {
+          "x": 0.5095061893610782,
+          "y": 24422.705107420144,
+          "label": "Apple announces AI company purchase for over $500m by end of 2025",
+          "category": "AI",
+          "url": "https://manifold.markets/DavidFWatson/apple-pays-over-500m-for-an-ai-comp"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "AI",
+    "Blockchain/Crypto",
+    "Science/Research",
+    "Politics/Society",
+    "Economics/Finance",
+    "Technology (General)",
+    "Health",
+    "Other"
+  ]
+}
