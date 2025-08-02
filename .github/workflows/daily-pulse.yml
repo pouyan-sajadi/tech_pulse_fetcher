@@ -22,10 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
-      - name: Test OpenAI Connectivity
-        run: curl -v https://api.openai.com/v1/models
-        
+              
       - name: Run the pulse monitor script     
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
