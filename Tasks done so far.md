@@ -2,6 +2,17 @@
 
 This document summarizes the completed tasks in the Tech Pulse Dashboard project.
 
+## Project Refactoring
+
+- **Restructured the project into a more modular and scalable architecture.**
+- **Created a `main.py` file to serve as the central workflow orchestrator.**
+- **Refactored `tech_pulse_fetcher.py` and `data_processor.py` into classes (`TechPulseFetcher` and `DataProcessor`) to improve code organization and reusability.**
+- **Eliminated the need for intermediate JSON files by passing data in-memory between the fetcher and processor.**
+- **Integrated a robust logging system using Python's `logging` module to replace `print` statements, making debugging easier.**
+- **Removed the `fetched_data` and `processed_data` directories as they are no longer needed.**
+- **Removed the outdated `visualize_charts.py` script.**
+- **Fixed a bug in the Manifold Markets data processing that was causing an error due to an invalid f-string.**
+
 ## Data Fetching and Organization
 - Created `fetched_data/` directory for raw data.
 - Modified `src/tech_pulse_fetcher.py` to:
