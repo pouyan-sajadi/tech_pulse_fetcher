@@ -70,13 +70,21 @@ class DataProcessor:
         }
         logging.info("Successfully processed GitHub trending data.")
         return chart_data
-
     def process_rss_feeds_for_wordcloud(self, rss_data):
-        logging.info("Processing RSS feed data for word cloud...")
-        all_text = " ".join([f"{article.get('title', '')} {article.get('description', '')}" for article in rss_data])
+        """
+        Processes RSS feed data by making two distinct LLM calls:
+        1. To generate keywords for a word cloud, including a contextual description for each.
+        2. To curate the top 3-5 trending news stories.
+        """
+        logging.info("Processing RSS feed data for word cloud and trending news...")
+        
+        # --- Data Preparation ---
+        all_text = " ".join([f"{article.get('title', '')} {article.get('description', '')}" for article in rss_data if article])
         cleaned_text = re.sub(r'[^a-zA-Z\s]', '', all_text).lower()
         words = cleaned_text.split()
+        
         STOP_WORDS = set(["the", "and", "a", "an", "is", "it", "in", "of", "for", "on", "with", "to", "from", "by", "as", "at", "be", "this", "that", "have", "has", "he", "she", "it", "they", "we", "you", "i", "me", "him", "her", "us", "them", "my", "your", "his", "her", "its", "our", "their", "what", "where", "when", "why", "how", "which", "who", "whom", "whose", "am", "are", "was", "were", "been", "being", "do", "does", "did", "done", "doing", "can", "could", "would", "should", "will", "may", "might", "must", "had", "get", "go", "new", "just", "also", "like", "said", "says", "say", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "up", "down", "out", "in", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now", "d", "ll", "m", "o", "re", "ve", "y", "ain", "aren", "couldn", "didn", "doesn", "hadn", "hasn", "haven", "isn", "ma", "mightn", "mustn", "needn", "shan", "shouldn", "wasn", "weren", "won", "wouldn"])
+        
         filtered_words = [word for word in words if word not in STOP_WORDS and len(word) > 2]
         word_counts = Counter(filtered_words)
         top_words = word_counts.most_common(50)
@@ -87,18 +95,117 @@ class DataProcessor:
             return {}
 
         try:
-            logging.info("Sending top words to LLM for keyword importance and hot topic extraction...")
-            response = openai.chat.completions.create(
+            # --- LLM Call 1: Generate Keywords with Descriptions for Word Cloud ---
+            logging.info("Sending top words to LLM for keyword extraction and description generation...")
+            
+            word_cloud_system_prompt = {
+                "role": "system",
+                "content": """You are a Tech Analyst creating an interactive word cloud from daily news. Your mission is to select the most significant keywords, score their importance, and write a concise, news-driven justification for each.
+
+**Your Rules:**
+1.  **Select & Score:** Prioritize specific entities (e.g., 'Nvidia', 'Sora', 'RAG') over generic terms ('model', 'data'). Assign a `value` (1-100) based on analytical importance (frequency + specificity + buzz), not just the raw count.
+2.  **Justify with `desc`:** This is the critical task. The `desc` field **MUST** justify why the keyword is in the news *today*. It is a one-sentence summary of its relevance in the source articles, not a generic definition.
+
+    *   **Keyword:** `Gemini`
+        *   **BAD (Generic):** "An advanced AI model by Google."
+        *   **GOOD (News-driven):** "Featured in today's news for its 1.5 Pro update and expanded context window."
+
+    *   **Keyword:** `Blackwell`
+        *   **BAD (Generic):** "A new GPU architecture from Nvidia."
+        *   **GOOD (News-driven):** "Dominating headlines as Nvidia's just-announced GPU platform, promising a major leap in AI performance."
+
+**Output Format:**
+Your entire output must be a single, valid JSON object with a `keywords` key. Adhere strictly to this format:
+{
+  "keywords": [
+    {
+      "text": "Blackwell",
+      "value": 95,
+      "desc": "Unveiled at the GTC conference today, with reports highlighting its 5x performance increase over the H100 model."
+    },
+    {
+      "text": "Sora",
+      "value": 88,
+      "desc": "Made headlines as OpenAI announced it is now granting access to a select group of filmmakers for creative projects."
+    }
+  ]
+}"""
+            }
+
+            word_cloud_response = openai.chat.completions.create(
                 model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant that extracts important keywords and identifies hot topics from a list of words and their frequencies. Provide keywords as a JSON array of objects like {'text': 'keyword', 'value': importance_score (1-100)}. Provide hot topics as a JSON array of objects like {'topic': 'topic_name', 'summary': 'brief_summary', 'trend': 'rising|stable|declining'}. The importance score should be a number between 1 and 100, reflecting how significant the keyword is in the context of tech news. Focus on single words or very short phrases that represent key concepts. Do not include common words or stop words. Ensure the output is valid JSON."},
-                    {"role": "user", "content": f"From the following list of words and their counts, identify important keywords and hot topics. Words: {llm_input_words}"}
+                    word_cloud_system_prompt,
+                    {"role": "user", "content": f"From the following list of words and their counts, generate the keywords JSON for the word cloud: {llm_input_words}"}
                 ],
-                response_format={ "type": "json_object" }
+                response_format={"type": "json_object"}
             )
-            llm_output = json.loads(response.choices[0].message.content)
-            logging.info("Successfully processed RSS feed data.")
-            return llm_output
+            word_cloud_output = json.loads(word_cloud_response.choices[0].message.content)
+
+            # --- LLM Call 2: Curate Top News Stories ---
+            logging.info("Sending summarized RSS feed data to LLM for top news curation...")
+            
+            # Prepare data for LLM Call 2
+            summarized_rss_data = [{"title": article.get('title', ''), "description": article.get('description', '')} for article in rss_data if article]
+            
+            trending_news_system_prompt = {
+                "role": "system",
+                "content": """You are the Chief Editor of 'The Daily Signal', a prestigious daily tech newsletter. Your mission is to analyze a collection of today's tech article summaries and curate the definitive 'Top 5 Most Significant Stories'.
+
+**Your Curation Heuristics:**
+1.  **Identify Major Themes & Avoid Redundancy:** Scan all summaries to find overlapping stories. Your Top 5 should represent five *distinct* events or trends.
+2.  **Rank by Impact:** Prioritize major product launches, significant research breakthroughs, and major industry shifts.
+3.  **Synthesize and Summarize:** For each topic, write a new, concise `summary` explaining what happened and why it's important.
+4.  **Assess `momentum`:** Based on the intensity of discussion in today's news, label the topic's momentum as `Intense` (dominating headlines), `Growing` (emerging and gaining traction), or `Steady` (important ongoing conversation).
+
+**Output Format:**
+Your entire response must be a single, valid JSON object with a single key `hot_topics`. The array should contain 3 to 5 topic objects.
+
+```json
+{
+  "hot_topics": [
+    {
+      "topic": "The Generative Video Arms Race",
+      "summary": "OpenAI's Sora model is driving intense discussion and competition, with rivals racing to release comparable text-to-video technologies.",
+      "momentum": "Intense"
+    },
+    {
+      "topic": "Nvidia's Next-Gen AI Hardware",
+      "summary": "The announcement of the Blackwell GPU architecture sets a new benchmark for AI computation, aiming to solidify Nvidia's market dominance.",
+      "momentum": "Intense"
+    },
+    {
+      "topic": "The Consolidation of AI Assistants",
+      "summary": "Recent acquisitions and feature integrations suggest the market for standalone AI assistants is maturing and consolidating around major tech players.",
+      "momentum": "Growing"
+    }
+  ]
+}
+```"""
+            }
+
+            trending_news_response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    trending_news_system_prompt,
+                    {"role": "user", "content": f"Analyze the following tech news summaries and curate the hot topics JSON: {json.dumps(summarized_rss_data)}"}
+                ],
+                response_format={"type": "json_object"}
+            )
+            trending_news_output = json.loads(trending_news_response.choices[0].message.content)
+
+            # --- Combine Outputs ---
+            final_output = {
+                "keywords": word_cloud_output.get("keywords", []),
+                "hot_topics": trending_news_output.get("hot_topics", [])
+            }
+            
+            logging.info("Successfully processed RSS feed data with two LLM calls.")
+            return final_output
+
+        except Exception as e:
+            logging.error(f"An error occurred during LLM processing: {e}")
+            return {}
         except Exception as e:
             logging.error(f"Error processing RSS feeds with LLM: {e}")
             return {}
@@ -155,8 +262,22 @@ class DataProcessor:
                 })
 
         sankey_data = {"nodes": nodes, "links": sankey_links}
+
+        # Also return product details for linking/display in frontend
+        product_details = []
+        for product in product_hunt_data:
+            product_details.append({
+                "title": product.get('title', ''),
+                "url": product.get('url', ''),
+                "topics": product.get('topics', [])
+            })
+
+        final_product_hunt_data = {
+            "sankey_data": sankey_data,
+            "product_details": product_details
+        }
         logging.info("Successfully processed Product Hunt data.")
-        return sankey_data
+        return final_product_hunt_data
 
     def process_manifold_predictions_for_bubble_plot(self, predictions_data):
         logging.info("Processing Manifold Markets data for bubble plot...")

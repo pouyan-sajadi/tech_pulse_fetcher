@@ -189,7 +189,7 @@ class TechPulseFetcher:
                     if description:
                         soup = BeautifulSoup(description, 'html.parser')
                         description = soup.get_text().strip()
-                        if len(description) > 1000:
+                        if len(description) > 1500:
                             description = description[:997] + '...'
                     if not description or len(description) < 50:
                         continue
