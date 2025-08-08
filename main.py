@@ -59,6 +59,20 @@ def main():
     if fetched_data.get('predictions'):
         processed_data['manifold_predictions_bubble_plot'] = processor.process_manifold_predictions_for_bubble_plot(fetched_data['predictions'])
 
+    # Save processed data to a local JSON file
+    if processed_data:
+        # Ensure the directory exists
+        os.makedirs("processed_data", exist_ok=True)
+        
+        # Generate a unique filename with a timestamp
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = f"processed_data/tech_pulse_processed_{timestamp}.json"
+        
+        with open(file_path, 'w') as f:
+            json.dump(processed_data, f, indent=4)
+        logging.info(f"Processed data saved to {file_path}")
+
     # Save processed data to Supabase
     if processed_data:
         save_data_to_supabase(processed_data)

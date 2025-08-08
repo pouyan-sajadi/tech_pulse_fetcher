@@ -121,7 +121,7 @@ class TechPulseFetcher:
             logging.error(f"Error fetching Product Hunt RSS: {str(e)}")
             return []
 
-    def fetch_github_trending(self, limit: int = 10) -> List[Dict]:
+    def fetch_github_trending(self, limit: int = 20) -> List[Dict]:
         logging.info("Fetching GitHub trending repos...")
         try:
             response = requests.get(self.github_trending_url, headers=self.headers)

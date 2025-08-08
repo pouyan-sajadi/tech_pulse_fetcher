@@ -74,7 +74,7 @@ class DataProcessor:
         """
         Processes RSS feed data by making two distinct LLM calls:
         1. To generate keywords for a word cloud, including a contextual description for each.
-        2. To curate the top 3-5 trending news stories.
+        2. To curate the top 5 trending news stories.
         """
         logging.info("Processing RSS feed data for word cloud and trending news...")
         
@@ -103,7 +103,7 @@ class DataProcessor:
                 "content": """You are a Tech Analyst creating an interactive word cloud from daily news. Your mission is to select the most significant keywords, score their importance, and write a concise, news-driven justification for each.
 
 **Your Rules:**
-1.  **Select & Score:** Prioritize specific entities (e.g., 'Nvidia', 'Sora', 'RAG') over generic terms ('model', 'data'). Assign a `value` (1-100) based on analytical importance (frequency + specificity + buzz), not just the raw count.
+1.  **Select & Score:** Prioritize specific entities (e.g., 'Nvidia', 'Sora', 'RAG') over generic terms ('model', 'data'). Assign a `value` (1-100) based on analytical importance (frequency + specificity + buzz), not just the raw count. Choose 5 to 10 different Words or terms.
 2.  **Justify with `desc`:** This is the critical task. The `desc` field **MUST** justify why the keyword is in the news *today*. It is a one-sentence summary of its relevance in the source articles, not a generic definition.
 
     *   **Keyword:** `Gemini`
@@ -211,8 +211,14 @@ Your entire response must be a single, valid JSON object with a single key `hot_
             return {}
 
     def process_product_hunt_for_sankey(self, product_hunt_data):
-        logging.info("Processing Product Hunt data for Sankey diagram...")
+        """
+        Processes Product Hunt data to generate connection data for a Nivo Sankey diagram.
+        The output format for nodes and links is specifically tailored for the Nivo library
+        to avoid data transformation on the frontend.
+        """
+        logging.info("Processing Product Hunt data for Nivo Sankey diagram...")
         CORE_CATEGORIES = ["AI/ML", "Developer Tools", "Productivity", "Design", "Marketing & Sales", "Finance", "Education", "Health & Fitness", "Gaming", "Hardware", "Security", "Social", "Data & Analytics", "No-Code/Low-Code", "Other"]
+        
         if not openai.api_key:
             logging.error("OPENAI_API_KEY not set. Skipping Product Hunt processing.")
             return {}
@@ -224,6 +230,7 @@ Your entire response must be a single, valid JSON object with a single key `hot_
             if not product_topics:
                 continue
             try:
+                # This LLM call logic remains the same
                 response = openai.chat.completions.create(
                     model="gpt-4o",
                     messages=[
@@ -240,28 +247,32 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                 logging.error(f"Error mapping topics for product {product.get('title')}: {e}")
                 all_mapped_categories.append(["Other"])
 
-        nodes = []
-        node_to_id = {}
-        for i, category in enumerate(CORE_CATEGORIES):
-            nodes.append({"node": i, "name": category})
-            node_to_id[category] = i
+        # --- MODIFICATION FOR NIVO ---
+        # Create nodes in the format Nivo expects: [{"id": "Category Name"}, ...]
+        nivo_nodes = [{"id": category} for category in CORE_CATEGORIES]
 
-        links = Counter()
+        # The logic for counting connections remains the same
+        links_counter = Counter()
         for product_cats in all_mapped_categories:
+            # Create connections between the top categories for each product
             for i in range(len(product_cats)):
                 for j in range(i + 1, len(product_cats)):
-                    links[tuple(sorted((product_cats[i], product_cats[j])))] += 1
+                    links_counter[tuple(sorted((product_cats[i], product_cats[j])))] += 1
 
-        sankey_links = []
-        for (source_cat, target_cat), value in links.items():
+        # --- MODIFICATION FOR NIVO ---
+        # Create links in the format Nivo expects: [{"source": "Source Name", "target": "Target Name", "value": ...}]
+        # The 'node_to_id' lookup is no longer needed.
+        nivo_links = []
+        for (source_cat, target_cat), value in links_counter.items():
             if value > 0:
-                sankey_links.append({
-                    "source": node_to_id[source_cat],
-                    "target": node_to_id[target_cat],
+                nivo_links.append({
+                    "source": source_cat,
+                    "target": target_cat,
                     "value": value
                 })
 
-        sankey_data = {"nodes": nodes, "links": sankey_links}
+        # Assemble the final Sankey data structure with the Nivo-compatible format
+        sankey_data = {"nodes": nivo_nodes, "links": nivo_links}
 
         # Also return product details for linking/display in frontend
         product_details = []
@@ -273,10 +284,11 @@ Your entire response must be a single, valid JSON object with a single key `hot_
             })
 
         final_product_hunt_data = {
-            "sankey_data": sankey_data,
+            # Note: The key name has been updated to reflect the new format's purpose
+            "product_hunt_tag_connections": sankey_data,
             "product_details": product_details
         }
-        logging.info("Successfully processed Product Hunt data.")
+        logging.info("Successfully processed Product Hunt data for Nivo.")
         return final_product_hunt_data
 
     def process_manifold_predictions_for_bubble_plot(self, predictions_data):

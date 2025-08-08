@@ -1,0 +1,500 @@
+{
+    "github_language_distribution": {
+        "labels": [
+            "TypeScript",
+            "Python",
+            "C++",
+            "Swift",
+            "C",
+            "C#"
+        ],
+        "datasets": [
+            {
+                "label": "GitHub Trending Languages",
+                "data": [
+                    5,
+                    4,
+                    1,
+                    1,
+                    1,
+                    1
+                ],
+                "backgroundColor": [
+                    "#3572A5",
+                    "#F1E05A",
+                    "#00ADD8",
+                    "#DEA584",
+                    "#89E051",
+                    "#B07219",
+                    "#CCCCCC"
+                ],
+                "hoverData": [
+                    {
+                        "total_stars": 61920,
+                        "stars_today": 2926,
+                        "repositories": [
+                            {
+                                "title": "dyad-sh/dyad",
+                                "description": "Free, local, open-source AI app builder \u2728 v0 / lovable / Bolt alternative \ud83c\udf1f Star if you like it!",
+                                "url": "https://github.com/dyad-sh/dyad",
+                                "stars": 9062,
+                                "stars_today": 2004
+                            },
+                            {
+                                "title": "simstudioai/sim",
+                                "description": "Sim is an open-source AI agent workflow builder. Sim Studio's interface is a lightweight, intuitive way to quickly build and deploy LLMs that connect with your favorite tools.",
+                                "url": "https://github.com/simstudioai/sim",
+                                "stars": 6568,
+                                "stars_today": 120
+                            },
+                            {
+                                "title": "actualbudget/actual",
+                                "description": "A local-first personal finance app",
+                                "url": "https://github.com/actualbudget/actual",
+                                "stars": 21118,
+                                "stars_today": 364
+                            },
+                            {
+                                "title": "wg-easy/wg-easy",
+                                "description": "The easiest way to run WireGuard VPN + Web-based Admin UI.",
+                                "url": "https://github.com/wg-easy/wg-easy",
+                                "stars": 21800,
+                                "stars_today": 388
+                            },
+                            {
+                                "title": "thewh1teagle/vibe",
+                                "description": "Transcribe on your own!",
+                                "url": "https://github.com/thewh1teagle/vibe",
+                                "stars": 3372,
+                                "stars_today": 50
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 394783,
+                        "stars_today": 1295,
+                        "repositories": [
+                            {
+                                "title": "reflex-dev/reflex",
+                                "description": "\ud83d\udd78\ufe0f Web apps in pure Python \ud83d\udc0d",
+                                "url": "https://github.com/reflex-dev/reflex",
+                                "stars": 25012,
+                                "stars_today": 479
+                            },
+                            {
+                                "title": "microsoft/mcp-for-beginners",
+                                "description": "This open-source curriculum introduces the fundamentals of Model Context Protocol (MCP) through real-world, cross-language examples in .NET, Java, TypeScript, JavaScript, and Python. Designed for developers, it focuses on practical techniques for building modular, scalable, and secure AI workflows from session setup to service orchestration.",
+                                "url": "https://github.com/microsoft/mcp-for-beginners",
+                                "stars": 7022,
+                                "stars_today": 420
+                            },
+                            {
+                                "title": "public-apis/public-apis",
+                                "description": "A collective list of free APIs",
+                                "url": "https://github.com/public-apis/public-apis",
+                                "stars": 359796,
+                                "stars_today": 331
+                            },
+                            {
+                                "title": "TideDra/zotero-arxiv-daily",
+                                "description": "Recommend new arxiv papers of your interest daily according to your Zotero libarary.",
+                                "url": "https://github.com/TideDra/zotero-arxiv-daily",
+                                "stars": 2953,
+                                "stars_today": 65
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 24762,
+                        "stars_today": 21,
+                        "repositories": [
+                            {
+                                "title": "ethereum/solidity",
+                                "description": "Solidity, the Smart Contract Programming Language",
+                                "url": "https://github.com/ethereum/solidity",
+                                "stars": 24762,
+                                "stars_today": 21
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 13765,
+                        "stars_today": 26,
+                        "repositories": [
+                            {
+                                "title": "pointfreeco/swift-composable-architecture",
+                                "description": "A library for building applications in a consistent and understandable way, with composition, testing, and ergonomics in mind.",
+                                "url": "https://github.com/pointfreeco/swift-composable-architecture",
+                                "stars": 13765,
+                                "stars_today": 26
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 23607,
+                        "stars_today": 159,
+                        "repositories": [
+                            {
+                                "title": "hashcat/hashcat",
+                                "description": "World's fastest and most advanced password recovery utility",
+                                "url": "https://github.com/hashcat/hashcat",
+                                "stars": 23607,
+                                "stars_today": 159
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 33776,
+                        "stars_today": 50,
+                        "repositories": [
+                            {
+                                "title": "huiyadanli/RevokeMsgPatcher",
+                                "description": "A hex editor for WeChat/QQ/TIM - PC\u7248\u5fae\u4fe1/QQ/TIM\u9632\u64a4\u56de\u8865\u4e01\uff08\u6211\u5df2\u7ecf\u770b\u5230\u4e86\uff0c\u64a4\u56de\u4e5f\u6ca1\u7528\u4e86\uff09",
+                                "url": "https://github.com/huiyadanli/RevokeMsgPatcher",
+                                "stars": 33776,
+                                "stars_today": 50
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "news_word_cloud": {
+        "keywords": [
+            {
+                "text": "Apple",
+                "value": 85,
+                "desc": "Highlighted in today's news for its recent announcement regarding the upcoming iPhone launch event."
+            },
+            {
+                "text": "OpenAI",
+                "value": 82,
+                "desc": "Received attention after announcing the beta release of its new AI text generation model to select developers."
+            },
+            {
+                "text": "Pixel",
+                "value": 78,
+                "desc": "Featured prominently due to Google teasing a new feature for its Pixel smartphone line, enhancing user experience."
+            },
+            {
+                "text": "Yaccarino",
+                "value": 76,
+                "desc": "In the spotlight for being named as the new CEO of a major media company, stirring industry conversations."
+            }
+        ],
+        "hot_topics": [
+            {
+                "topic": "OpenAI Releases Open Language Models",
+                "summary": "OpenAI has launched open-weight language models, marking their first such release since GPT-2. The models are designed to be freely downloaded and run, opening possibilities for broader experimentation and innovation in AI language technology.",
+                "momentum": "Intense"
+            },
+            {
+                "topic": "OpenAI's AWS Availability",
+                "summary": "For the first time, OpenAI models have been made available on AWS. This strategic partnership between OpenAI and AWS intensifies the competitive dynamics in cloud AI services, offering potential for enhanced capabilities and accessibility.",
+                "momentum": "Intense"
+            },
+            {
+                "topic": "Ghost Expands with ActivityPub Integration",
+                "summary": "Ghost, a Substack competitor, has included ActivityPub integration in its latest release, allowing it to connect to the open social web. This development represents a significant step in challenging established content platforms by leveraging decentralized social connectivity.",
+                "momentum": "Growing"
+            },
+            {
+                "topic": "AI Agents and Their Role in Digital Lives",
+                "summary": "New protocols aim to enhance AI agents' ability to perform tasks like sending emails and editing databases on behalf of users. Despite mixed initial reviews, the evolution of these agents points to significant potential in automating complex digital interactions.",
+                "momentum": "Growing"
+            }
+        ]
+    },
+    "product_hunt_tag_connections": {
+        "product_hunt_tag_connections": {
+            "nodes": [
+                {
+                    "id": "AI/ML"
+                },
+                {
+                    "id": "Developer Tools"
+                },
+                {
+                    "id": "Productivity"
+                },
+                {
+                    "id": "Design"
+                },
+                {
+                    "id": "Marketing & Sales"
+                },
+                {
+                    "id": "Finance"
+                },
+                {
+                    "id": "Education"
+                },
+                {
+                    "id": "Health & Fitness"
+                },
+                {
+                    "id": "Gaming"
+                },
+                {
+                    "id": "Hardware"
+                },
+                {
+                    "id": "Security"
+                },
+                {
+                    "id": "Social"
+                },
+                {
+                    "id": "Data & Analytics"
+                },
+                {
+                    "id": "No-Code/Low-Code"
+                },
+                {
+                    "id": "Other"
+                }
+            ],
+            "links": [
+                {
+                    "source": "Developer Tools",
+                    "target": "Marketing & Sales",
+                    "value": 1
+                },
+                {
+                    "source": "AI/ML",
+                    "target": "Developer Tools",
+                    "value": 1
+                },
+                {
+                    "source": "Developer Tools",
+                    "target": "Productivity",
+                    "value": 2
+                },
+                {
+                    "source": "Marketing & Sales",
+                    "target": "Productivity",
+                    "value": 2
+                },
+                {
+                    "source": "Design",
+                    "target": "Other",
+                    "value": 1
+                },
+                {
+                    "source": "Design",
+                    "target": "Productivity",
+                    "value": 1
+                },
+                {
+                    "source": "Finance",
+                    "target": "Productivity",
+                    "value": 1
+                },
+                {
+                    "source": "Design",
+                    "target": "Developer Tools",
+                    "value": 1
+                }
+            ]
+        },
+        "product_details": [
+            {
+                "title": "Startup Stash",
+                "url": "https://www.producthunt.com/products/startup-stash?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Tech",
+                    "Startup Lessons"
+                ]
+            },
+            {
+                "title": "Wordware",
+                "url": "https://www.producthunt.com/products/wordware?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Software Engineering",
+                    "Developer Tools",
+                    "Artificial Intelligence"
+                ]
+            },
+            {
+                "title": "Slack",
+                "url": "https://www.producthunt.com/products/slack?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Android",
+                    "iOS",
+                    "Mac",
+                    "Web App",
+                    "Productivity",
+                    "Messaging",
+                    "API",
+                    "Developer Tools",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Startup Pitch Decks",
+                "url": "https://www.producthunt.com/products/attach?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Productivity",
+                    "Marketing",
+                    "Venture Capital",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Pexels 2.0",
+                "url": "https://www.producthunt.com/products/pexels?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Design Tools",
+                    "Photography",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "remove.bg",
+                "url": "https://www.producthunt.com/products/remove-bg?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Design Tools",
+                    "Productivity",
+                    "Photography"
+                ]
+            },
+            {
+                "title": "Notion 2.0",
+                "url": "https://www.producthunt.com/products/notion?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Productivity",
+                    "Notes",
+                    "Spreadsheets",
+                    "Notion"
+                ]
+            },
+            {
+                "title": "Good Email Copy",
+                "url": "https://www.producthunt.com/products/good-email-copy?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Email",
+                    "Writing",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Coolors",
+                "url": "https://www.producthunt.com/products/coolors?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "iOS",
+                    "Web App",
+                    "Design Tools",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Hunter",
+                "url": "https://www.producthunt.com/products/hunter?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Email",
+                    "Hiring",
+                    "Sales",
+                    "Email Marketing",
+                    "Marketing",
+                    "Growth Hacking",
+                    "Tech"
+                ]
+            }
+        ]
+    },
+    "manifold_predictions_bubble_plot": {
+        "datasets": [
+            {
+                "label": "Manifold Predictions",
+                "data": [
+                    {
+                        "x": 0.42111755378226595,
+                        "y": 10045676.904823592,
+                        "label": "In early 2028, will an AI be able to generate a full high-quality movie to a prompt?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/ScottAlexander/in-2028-will-an-ai-be-able-to-gener"
+                    },
+                    {
+                        "x": 0.9637121791518324,
+                        "y": 90854.04325294435,
+                        "label": "GPT-5 released before August 15, 2025?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/predyx_markets/gpt5-released-before-august-15-2025"
+                    },
+                    {
+                        "x": 0.5124432686213557,
+                        "y": 88190.35417759238,
+                        "label": "Daily Coinflip",
+                        "category": "Other",
+                        "url": "https://manifold.markets/Traveel/daily-coinflip-OsdAUAp66h"
+                    },
+                    {
+                        "x": 0.16179816908287964,
+                        "y": 71940.59735384573,
+                        "label": "Will the next OpenAI model have a stupid fucking name? [Must be plus-tier accessible]",
+                        "category": "AI",
+                        "url": "https://manifold.markets/Bandors/will-the-next-openai-model-have-a-s"
+                    },
+                    {
+                        "x": 0.9501842218996588,
+                        "y": 48577.52049713089,
+                        "label": "GPT-5 released before August 10, 2025?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/predyx_markets/gpt5-released-before-august-10-2025"
+                    },
+                    {
+                        "x": 0.9832770868105314,
+                        "y": 36393.40456736974,
+                        "label": "Will GPT-5 be released before Feb 2026?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/RemNi/will-gpt5-be-released-before-feb-20"
+                    },
+                    {
+                        "x": 0.4474549937385661,
+                        "y": 35964.7177438426,
+                        "label": "GPT 5 Exceeds Expectations",
+                        "category": "AI",
+                        "url": "https://manifold.markets/GabeGarboden/gpt-5-exceeds-expectations"
+                    },
+                    {
+                        "x": 0.9827612690890849,
+                        "y": 30226.187155707175,
+                        "label": "GPT-5 released in August 2025?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/predyx_markets/gpt5-released-in-august-2025"
+                    },
+                    {
+                        "x": 0.9638747807331971,
+                        "y": 24359.471216773047,
+                        "label": "Will GPT-5 launch this week? (Before 8/9)",
+                        "category": "AI",
+                        "url": "https://manifold.markets/patience_cave/will-gpt5-launch-this-week-before-8"
+                    },
+                    {
+                        "x": 0.984736317606975,
+                        "y": 21350.26900012722,
+                        "label": "Will GPT-5 be released before March 31st, 2026?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/BoltonBailey/will-gpt5-be-released-before-march"
+                    }
+                ]
+            }
+        ],
+        "categories": [
+            "AI",
+            "Blockchain/Crypto",
+            "Science/Research",
+            "Politics/Society",
+            "Economics/Finance",
+            "Technology (General)",
+            "Health",
+            "Other"
+        ]
+    }
+}
