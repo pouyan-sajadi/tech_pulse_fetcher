@@ -213,10 +213,10 @@ Your entire response must be a single, valid JSON object with a single key `hot_
     def process_product_hunt_for_sankey(self, product_hunt_data):
         """
         Processes Product Hunt data to generate connection data for a Nivo Sankey diagram.
-        The output format for nodes and links is specifically tailored for the Nivo library
-        to avoid data transformation on the frontend.
+        The output format is tailored for interactive charts, with product details
+        embedded directly within each node.
         """
-        logging.info("Processing Product Hunt data for Nivo Sankey diagram...")
+        logging.info("Processing Product Hunt data for interactive Nivo Sankey diagram...")
         CORE_CATEGORIES = ["AI/ML", "Developer Tools", "Productivity", "Design", "Marketing & Sales", "Finance", "Education", "Health & Fitness", "Gaming", "Hardware", "Security", "Social", "Data & Analytics", "No-Code/Low-Code", "Other"]
         
         if not openai.api_key:
@@ -227,10 +227,11 @@ Your entire response must be a single, valid JSON object with a single key `hot_
         logging.info("Mapping Product Hunt topics to core categories using LLM...")
         for product in product_hunt_data:
             product_topics = product.get('topics', [])
+            # Fallback for products with no topics to avoid errors
             if not product_topics:
+                all_mapped_categories.append(['Other'])
                 continue
             try:
-                # This LLM call logic remains the same
                 response = openai.chat.completions.create(
                     model="gpt-4o",
                     messages=[
@@ -241,27 +242,42 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                 )
                 relevance_scores = json.loads(response.choices[0].message.content.strip())
                 sorted_categories = sorted(relevance_scores.items(), key=lambda item: item[1], reverse=True)
+                # Map product to top 2 categories with a relevance score > 3
                 product_mapped_categories = [cat for cat, score in sorted_categories[:2] if score > 3]
-                all_mapped_categories.append(product_mapped_categories)
+                if not product_mapped_categories:
+                    all_mapped_categories.append(['Other'])
+                else:
+                    all_mapped_categories.append(product_mapped_categories)
             except Exception as e:
                 logging.error(f"Error mapping topics for product {product.get('title')}: {e}")
                 all_mapped_categories.append(["Other"])
 
-        # --- MODIFICATION FOR NIVO ---
-        # Create nodes in the format Nivo expects: [{"id": "Category Name"}, ...]
-        nivo_nodes = [{"id": category} for category in CORE_CATEGORIES]
+        # 1. Create a map of core categories to the products that fall into them
+        category_to_products_map = {category: [] for category in CORE_CATEGORIES}
+        for i, product in enumerate(product_hunt_data):
+            # Use the description, fallback to tagline
+            description = product.get('description') or product.get('tagline', 'No description available.')
+            product_info = {
+                "title": product.get('title', 'Unknown Product'),
+                "url": product.get('url', ''),
+                "description": description
+            }
+            # Use the mapped categories from the LLM step
+            mapped_categories_for_product = all_mapped_categories[i]
+            for category in mapped_categories_for_product:
+                if category in category_to_products_map:
+                    category_to_products_map[category].append(product_info)
 
-        # The logic for counting connections remains the same
+        # 2. Create the new, enriched nodes for the Sankey chart
+        nivo_nodes = [{"id": category, "products": category_to_products_map.get(category, [])} for category in CORE_CATEGORIES]
+
+        # 3. Create links based on co-occurrence in mapped categories
         links_counter = Counter()
         for product_cats in all_mapped_categories:
-            # Create connections between the top categories for each product
             for i in range(len(product_cats)):
                 for j in range(i + 1, len(product_cats)):
                     links_counter[tuple(sorted((product_cats[i], product_cats[j])))] += 1
-
-        # --- MODIFICATION FOR NIVO ---
-        # Create links in the format Nivo expects: [{"source": "Source Name", "target": "Target Name", "value": ...}]
-        # The 'node_to_id' lookup is no longer needed.
+        
         nivo_links = []
         for (source_cat, target_cat), value in links_counter.items():
             if value > 0:
@@ -271,25 +287,12 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                     "value": value
                 })
 
-        # Assemble the final Sankey data structure with the Nivo-compatible format
+        # 4. Assemble the final Sankey data structure
+        # This cleaner structure avoids the nested key and removes the now-redundant product_details
         sankey_data = {"nodes": nivo_nodes, "links": nivo_links}
-
-        # Also return product details for linking/display in frontend
-        product_details = []
-        for product in product_hunt_data:
-            product_details.append({
-                "title": product.get('title', ''),
-                "url": product.get('url', ''),
-                "topics": product.get('topics', [])
-            })
-
-        final_product_hunt_data = {
-            # Note: The key name has been updated to reflect the new format's purpose
-            "product_hunt_tag_connections": sankey_data,
-            "product_details": product_details
-        }
-        logging.info("Successfully processed Product Hunt data for Nivo.")
-        return final_product_hunt_data
+        
+        logging.info("Successfully processed Product Hunt data for Nivo with enriched nodes.")
+        return sankey_data
 
     def process_manifold_predictions_for_bubble_plot(self, predictions_data):
         logging.info("Processing Manifold Markets data for bubble plot...")
