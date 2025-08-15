@@ -1,1 +1,7 @@
 .env
+processed_data/
+logs/
+venv/
+visualizations/
+INSTRUCTIONS.md
+visualize_charts.py

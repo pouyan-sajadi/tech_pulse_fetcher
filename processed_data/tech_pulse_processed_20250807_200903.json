@@ -1,0 +1,556 @@
+{
+    "github_language_distribution": {
+        "labels": [
+            "Rust",
+            "TypeScript",
+            "C",
+            "Python",
+            "Go",
+            "C++",
+            "Jupyter Notebook",
+            "Dart",
+            "C#"
+        ],
+        "datasets": [
+            {
+                "label": "GitHub Trending Languages",
+                "data": [
+                    1,
+                    3,
+                    1,
+                    1,
+                    3,
+                    1,
+                    2,
+                    1,
+                    1
+                ],
+                "backgroundColor": [
+                    "#3572A5",
+                    "#F1E05A",
+                    "#00ADD8",
+                    "#DEA584",
+                    "#89E051",
+                    "#B07219",
+                    "#CCCCCC"
+                ],
+                "hoverData": [
+                    {
+                        "total_stars": 12731,
+                        "stars_today": 1894,
+                        "repositories": [
+                            {
+                                "title": "nautechsystems/nautilus_trader",
+                                "description": "A high-performance algorithmic trading platform and event-driven backtester",
+                                "url": "https://github.com/nautechsystems/nautilus_trader",
+                                "stars": 12731,
+                                "stars_today": 1894
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 66120,
+                        "stars_today": 847,
+                        "repositories": [
+                            {
+                                "title": "browserbase/stagehand",
+                                "description": "The AI Browser Automation Framework",
+                                "url": "https://github.com/browserbase/stagehand",
+                                "stars": 15702,
+                                "stars_today": 354
+                            },
+                            {
+                                "title": "simstudioai/sim",
+                                "description": "Sim is an open-source AI agent workflow builder. Sim Studio's interface is a lightweight, intuitive way to quickly build and deploy LLMs that connect with your favorite tools.",
+                                "url": "https://github.com/simstudioai/sim",
+                                "stars": 7043,
+                                "stars_today": 263
+                            },
+                            {
+                                "title": "prisma/prisma",
+                                "description": "Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB",
+                                "url": "https://github.com/prisma/prisma",
+                                "stars": 43375,
+                                "stars_today": 230
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 20636,
+                        "stars_today": 42,
+                        "repositories": [
+                            {
+                                "title": "lvgl/lvgl",
+                                "description": "Embedded graphics library to create beautiful UIs for any MCU, MPU and display type.",
+                                "url": "https://github.com/lvgl/lvgl",
+                                "stars": 20636,
+                                "stars_today": 42
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 54456,
+                        "stars_today": 154,
+                        "repositories": [
+                            {
+                                "title": "vllm-project/vllm",
+                                "description": "A high-throughput and memory-efficient inference and serving engine for LLMs",
+                                "url": "https://github.com/vllm-project/vllm",
+                                "stars": 54456,
+                                "stars_today": 154
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 230150,
+                        "stars_today": 416,
+                        "repositories": [
+                            {
+                                "title": "ollama/ollama",
+                                "description": "Get up and running with OpenAI gpt-oss, DeepSeek-R1, Gemma 3 and other models.",
+                                "url": "https://github.com/ollama/ollama",
+                                "stars": 149403,
+                                "stars_today": 242
+                            },
+                            {
+                                "title": "netbirdio/netbird",
+                                "description": "Connect your devices into a secure WireGuard\u00ae-based overlay network with SSO, MFA and granular access controls.",
+                                "url": "https://github.com/netbirdio/netbird",
+                                "stars": 17769,
+                                "stars_today": 85
+                            },
+                            {
+                                "title": "jesseduffield/lazygit",
+                                "description": "simple terminal UI for git commands",
+                                "url": "https://github.com/jesseduffield/lazygit",
+                                "stars": 62978,
+                                "stars_today": 89
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 24918,
+                        "stars_today": 69,
+                        "repositories": [
+                            {
+                                "title": "ethereum/solidity",
+                                "description": "Solidity, the Smart Contract Programming Language",
+                                "url": "https://github.com/ethereum/solidity",
+                                "stars": 24918,
+                                "stars_today": 69
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 89010,
+                        "stars_today": 402,
+                        "repositories": [
+                            {
+                                "title": "openai/openai-cookbook",
+                                "description": "Examples and guides for using the OpenAI API",
+                                "url": "https://github.com/openai/openai-cookbook",
+                                "stars": 66348,
+                                "stars_today": 315
+                            },
+                            {
+                                "title": "datawhalechina/self-llm",
+                                "description": "\u300a\u5f00\u6e90\u5927\u6a21\u578b\u98df\u7528\u6307\u5357\u300b\u9488\u5bf9\u4e2d\u56fd\u5b9d\u5b9d\u91cf\u8eab\u6253\u9020\u7684\u57fa\u4e8eLinux\u73af\u5883\u5feb\u901f\u5fae\u8c03\uff08\u5168\u53c2\u6570/Lora\uff09\u3001\u90e8\u7f72\u56fd\u5185\u5916\u5f00\u6e90\u5927\u6a21\u578b\uff08LLM\uff09/\u591a\u6a21\u6001\u5927\u6a21\u578b\uff08MLLM\uff09\u6559\u7a0b",
+                                "url": "https://github.com/datawhalechina/self-llm",
+                                "stars": 22662,
+                                "stars_today": 87
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 11878,
+                        "stars_today": 42,
+                        "repositories": [
+                            {
+                                "title": "xiaoyaocz/dart_simple_live",
+                                "description": "\u7b80\u7b80\u5355\u5355\u7684\u770b\u76f4\u64ad",
+                                "url": "https://github.com/xiaoyaocz/dart_simple_live",
+                                "stars": 11878,
+                                "stars_today": 42
+                            }
+                        ]
+                    },
+                    {
+                        "total_stars": 14284,
+                        "stars_today": 7,
+                        "repositories": [
+                            {
+                                "title": "dotnet/efcore",
+                                "description": "EF Core is a modern object-database mapper for .NET. It supports LINQ queries, change tracking, updates, and schema migrations.",
+                                "url": "https://github.com/dotnet/efcore",
+                                "stars": 14284,
+                                "stars_today": 7
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "news_word_cloud": {
+        "keywords": [
+            {
+                "text": "Zuckerberg",
+                "value": 90,
+                "desc": "Captured attention with his announcement of new features coming to Meta's virtual reality platform."
+            },
+            {
+                "text": "OpenAI",
+                "value": 88,
+                "desc": "Highlighted as it rolls out GPT-4's latest upgrade with significant performance improvements."
+            },
+            {
+                "text": "ChatGPT",
+                "value": 85,
+                "desc": "Featured prominently for introducing a multilingual support feature in its latest update."
+            },
+            {
+                "text": "Meta",
+                "value": 82,
+                "desc": "In the spotlight as it reveals ambitious plans to integrate AI across all its social platforms."
+            },
+            {
+                "text": "Dojo",
+                "value": 80,
+                "desc": "Recognized today for securing a major funding round aimed at boosting its AI training capabilities."
+            },
+            {
+                "text": "Browser",
+                "value": 76,
+                "desc": "Noteworthy today as a new privacy-focused web browser is officially launched."
+            },
+            {
+                "text": "Rocket Lab",
+                "value": 70,
+                "desc": "Announced a successful satellite launch, garnering recognition in aerospace advancements."
+            },
+            {
+                "text": "Brex",
+                "value": 65,
+                "desc": "In the news for finalizing an acquisition that expands its financial services portfolio."
+            }
+        ],
+        "hot_topics": [
+            {
+                "topic": "GPT-5's Arrival and Impact",
+                "summary": "OpenAI has launched GPT-5, heralding significant improvements in AI's capability and usability. With updates to ChatGPT, including the removal of model distinctions, GPT-5 is set to enhance user experiences dramatically.",
+                "momentum": "Intense"
+            },
+            {
+                "topic": "Shutdown of Tesla's Dojo Project",
+                "summary": "Tesla's decision to shut down its Dojo AI training supercomputer marks a significant pivot, likely affecting its progress towards fully self-driving vehicles and highlighting internal organizational upheavals.",
+                "momentum": "Growing"
+            },
+            {
+                "topic": "Growth of Space Defense Capabilities",
+                "summary": "Rocket Lab's new acquisition aims to expand its presence as a major player in the defense sector, marking a strategic shift towards integrated space solutions.",
+                "momentum": "Steady"
+            },
+            {
+                "topic": "Brex's EU Expansion and Market Penetration",
+                "summary": "Brex has been approved to sell its spend management products across the EU, a significant step towards global market expansion and indication of growing financial service convergence.",
+                "momentum": "Growing"
+            },
+            {
+                "topic": "Challenges Facing AI Coding Startups",
+                "summary": "High operational costs and unprofitability are threatening the sustainability of AI coding startups, highlighting a critical industry challenge amidst the AI boom.",
+                "momentum": "Steady"
+            }
+        ]
+    },
+    "product_hunt_tag_connections": {
+        "product_hunt_tag_connections": {
+            "nodes": [
+                {
+                    "id": "AI/ML"
+                },
+                {
+                    "id": "Developer Tools"
+                },
+                {
+                    "id": "Productivity"
+                },
+                {
+                    "id": "Design"
+                },
+                {
+                    "id": "Marketing & Sales"
+                },
+                {
+                    "id": "Finance"
+                },
+                {
+                    "id": "Education"
+                },
+                {
+                    "id": "Health & Fitness"
+                },
+                {
+                    "id": "Gaming"
+                },
+                {
+                    "id": "Hardware"
+                },
+                {
+                    "id": "Security"
+                },
+                {
+                    "id": "Social"
+                },
+                {
+                    "id": "Data & Analytics"
+                },
+                {
+                    "id": "No-Code/Low-Code"
+                },
+                {
+                    "id": "Other"
+                }
+            ],
+            "links": [
+                {
+                    "source": "Marketing & Sales",
+                    "target": "Other",
+                    "value": 1
+                },
+                {
+                    "source": "AI/ML",
+                    "target": "Developer Tools",
+                    "value": 1
+                },
+                {
+                    "source": "Developer Tools",
+                    "target": "Productivity",
+                    "value": 2
+                },
+                {
+                    "source": "Marketing & Sales",
+                    "target": "Productivity",
+                    "value": 2
+                },
+                {
+                    "source": "Design",
+                    "target": "Other",
+                    "value": 1
+                },
+                {
+                    "source": "Design",
+                    "target": "Productivity",
+                    "value": 1
+                },
+                {
+                    "source": "No-Code/Low-Code",
+                    "target": "Productivity",
+                    "value": 1
+                },
+                {
+                    "source": "Design",
+                    "target": "Developer Tools",
+                    "value": 1
+                }
+            ]
+        },
+        "product_details": [
+            {
+                "title": "Startup Stash",
+                "url": "https://www.producthunt.com/products/startup-stash?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Tech",
+                    "Startup Lessons"
+                ]
+            },
+            {
+                "title": "Wordware",
+                "url": "https://www.producthunt.com/products/wordware?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Software Engineering",
+                    "Developer Tools",
+                    "Artificial Intelligence"
+                ]
+            },
+            {
+                "title": "Slack",
+                "url": "https://www.producthunt.com/products/slack?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Android",
+                    "iOS",
+                    "Mac",
+                    "Web App",
+                    "Productivity",
+                    "Messaging",
+                    "API",
+                    "Developer Tools",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Startup Pitch Decks",
+                "url": "https://www.producthunt.com/products/attach?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Productivity",
+                    "Marketing",
+                    "Venture Capital",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Pexels 2.0",
+                "url": "https://www.producthunt.com/products/pexels?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Design Tools",
+                    "Photography",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "remove.bg",
+                "url": "https://www.producthunt.com/products/remove-bg?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Design Tools",
+                    "Productivity",
+                    "Photography"
+                ]
+            },
+            {
+                "title": "Notion 2.0",
+                "url": "https://www.producthunt.com/products/notion?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Productivity",
+                    "Notes",
+                    "Spreadsheets",
+                    "Notion"
+                ]
+            },
+            {
+                "title": "Good Email Copy",
+                "url": "https://www.producthunt.com/products/good-email-copy?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Email",
+                    "Writing",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Coolors",
+                "url": "https://www.producthunt.com/products/coolors?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "iOS",
+                    "Web App",
+                    "Design Tools",
+                    "Tech"
+                ]
+            },
+            {
+                "title": "Hunter",
+                "url": "https://www.producthunt.com/products/hunter?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+Tech+News+Website+%28ID%3A+205643%29",
+                "topics": [
+                    "Web App",
+                    "Email",
+                    "Hiring",
+                    "Sales",
+                    "Email Marketing",
+                    "Marketing",
+                    "Growth Hacking",
+                    "Tech"
+                ]
+            }
+        ]
+    },
+    "manifold_predictions_bubble_plot": {
+        "datasets": [
+            {
+                "label": "Manifold Predictions",
+                "data": [
+                    {
+                        "x": 0.6788374286987299,
+                        "y": 1756320.4919575385,
+                        "label": "In 2028, will AI be at least as big a political issue as abortion?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/ScottAlexander/in-2028-will-ai-be-at-least-as-big"
+                    },
+                    {
+                        "x": 0.10325232920383846,
+                        "y": 1035416.0627914697,
+                        "label": "Will OpenAI hint at [read description] or claim to have AGI by 2025 end?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/_deleted_/will-openai-hint-at-or-claim-to-hav"
+                    },
+                    {
+                        "x": 0.3950069461171728,
+                        "y": 484274.95492573926,
+                        "label": "Will China launch a full-scale invasion of Taiwan before 2030?",
+                        "category": "Politics/Society",
+                        "url": "https://manifold.markets/MetaculusBot/will-china-launch-a-fullscale-invas"
+                    },
+                    {
+                        "x": 0.11618856197078335,
+                        "y": 372542.20210162486,
+                        "label": "Will the Russia-Ukraine war end before the end of 2025?",
+                        "category": "Politics/Society",
+                        "url": "https://manifold.markets/NoyaV/will-the-russiaukraine-war-end-befo-422007be261a"
+                    },
+                    {
+                        "x": 0.2534923079182587,
+                        "y": 333265.3609867803,
+                        "label": "By 2028, will there be a visible break in trend line on US GDP, GDP per capita, unemployment, or productivity, which most economists attribute directly to the effects of AI?",
+                        "category": "Economics/Finance",
+                        "url": "https://manifold.markets/ScottAlexander/by-2028-will-there-be-a-visible-bre"
+                    },
+                    {
+                        "x": 0.08585876189273073,
+                        "y": 116423.31649766884,
+                        "label": "Will an AI score over 80% on FrontierMath Benchmark in 2025",
+                        "category": "AI",
+                        "url": "https://manifold.markets/sponge/will-an-ai-score-over-80-on-frontie"
+                    },
+                    {
+                        "x": 0.023905692737003974,
+                        "y": 97114.62093704086,
+                        "label": "Will an AI score 1st place on International Math Olympiad (IMO) 2025?",
+                        "category": "AI",
+                        "url": "https://manifold.markets/jack/will-an-ai-outcompete-the-best-huma-cj3ul7a2g2"
+                    },
+                    {
+                        "x": 0.38358680993478467,
+                        "y": 95957.67623194904,
+                        "label": "Bitcoin $150K in 2025?",
+                        "category": "Blockchain/Crypto",
+                        "url": "https://manifold.markets/predyx_markets/bitcoin-150k-in-2025"
+                    },
+                    {
+                        "x": 0.27371487551035795,
+                        "y": 69727.4571864765,
+                        "label": "Will there be a bilateral ceasefire in the Russo-Ukraine conflict before 2026?",
+                        "category": "Politics/Society",
+                        "url": "https://manifold.markets/WalterMartin/will-there-be-a-bilateral-ceasefire-5z0zRtdl5P"
+                    },
+                    {
+                        "x": 0.12368856197078346,
+                        "y": 56234.628757326296,
+                        "label": "Will the war in Ukraine end before 2026",
+                        "category": "Politics/Society",
+                        "url": "https://manifold.markets/JacobStates/will-the-war-in-ukraine-end-by-2026"
+                    }
+                ]
+            }
+        ],
+        "categories": [
+            "AI",
+            "Blockchain/Crypto",
+            "Science/Research",
+            "Politics/Society",
+            "Economics/Finance",
+            "Technology (General)",
+            "Health",
+            "Other"
+        ]
+    }
+}

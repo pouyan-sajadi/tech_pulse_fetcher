@@ -233,7 +233,7 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                 continue
             try:
                 response = openai.chat.completions.create(
-                    model="gpt-4o",
+                    model="gpt-5",
                     messages=[
                         {"role": "system", "content": f"You are a helpful assistant that rates the relevance of product topics to a predefined list of core categories. Your response must be a JSON object where keys are the categories and values are relevance scores from 1 to 10. The categories are: {CORE_CATEGORIES}."},
                         {"role": "user", "content": f"Rate the relevance of the following topics to the core categories: {product_topics}"}
