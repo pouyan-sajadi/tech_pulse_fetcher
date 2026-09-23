@@ -1,7 +1,7 @@
 requests
 feedparser
 beautifulsoup4
-openai
+openai==1.97.0
 python-dotenv
 matplotlib
 supabase

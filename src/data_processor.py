@@ -2,7 +2,7 @@ import json
 from collections import Counter
 import re
 import os
-import openai
+from src.llm_client import llm_client
 from dotenv import load_dotenv
 import logging
 
@@ -11,12 +11,11 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 # Load environment variables
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class DataProcessor:
     def __init__(self):
-        if not openai.api_key:
-            logging.warning("OPENAI_API_KEY environment variable not set. LLM-based processing will be skipped.")
+        if not llm_client.api_key:
+            logging.warning("LLM_API_KEY environment variable not set. LLM-based processing will be skipped.")
 
     def process_github_trending(self, github_data):
         logging.info("Processing GitHub trending data...")
@@ -90,8 +89,8 @@ class DataProcessor:
         top_words = word_counts.most_common(50)
         llm_input_words = ", ".join([f"'{word}' (count: {count})" for word, count in top_words])
 
-        if not openai.api_key:
-            logging.error("OPENAI_API_KEY not set. Skipping RSS feed processing.")
+        if not llm_client.api_key:
+            logging.error("LLM_API_KEY not set. Skipping RSS feed processing.")
             return {}
 
         try:
@@ -132,15 +131,10 @@ Your entire output must be a single, valid JSON object with a `keywords` key. Ad
 }"""
             }
 
-            word_cloud_response = openai.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    word_cloud_system_prompt,
-                    {"role": "user", "content": f"From the following list of words and their counts, generate the keywords JSON for the word cloud: {llm_input_words}"}
-                ],
-                response_format={"type": "json_object"}
+            word_cloud_output = llm_client.chat_json(
+                system_prompt=word_cloud_system_prompt,
+                user_message=f"From the following list of words and their counts, generate the keywords JSON for the word cloud: {llm_input_words}"
             )
-            word_cloud_output = json.loads(word_cloud_response.choices[0].message.content)
 
             # --- LLM Call 2: Curate Top News Stories ---
             logging.info("Sending summarized RSS feed data to LLM for top news curation...")
@@ -184,15 +178,10 @@ Your entire response must be a single, valid JSON object with a single key `hot_
 ```"""
             }
 
-            trending_news_response = openai.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    trending_news_system_prompt,
-                    {"role": "user", "content": f"Analyze the following tech news summaries and curate the hot topics JSON: {json.dumps(summarized_rss_data)}"}
-                ],
-                response_format={"type": "json_object"}
+            trending_news_output = llm_client.chat_json(
+                system_prompt=trending_news_system_prompt,
+                user_message=f"Analyze the following tech news summaries and curate the hot topics JSON: {json.dumps(summarized_rss_data)}"
             )
-            trending_news_output = json.loads(trending_news_response.choices[0].message.content)
 
             # --- Combine Outputs ---
             final_output = {
@@ -203,9 +192,6 @@ Your entire response must be a single, valid JSON object with a single key `hot_
             logging.info("Successfully processed RSS feed data with two LLM calls.")
             return final_output
 
-        except Exception as e:
-            logging.error(f"An error occurred during LLM processing: {e}")
-            return {}
         except Exception as e:
             logging.error(f"Error processing RSS feeds with LLM: {e}")
             return {}
@@ -219,8 +205,8 @@ Your entire response must be a single, valid JSON object with a single key `hot_
         logging.info("Processing Product Hunt data for interactive Nivo Sankey diagram...")
         CORE_CATEGORIES = ["AI/ML", "Developer Tools", "Productivity", "Design", "Marketing & Sales", "Finance", "Education", "Health & Fitness", "Gaming", "Hardware", "Security", "Social", "Data & Analytics", "No-Code/Low-Code", "Other"]
         
-        if not openai.api_key:
-            logging.error("OPENAI_API_KEY not set. Skipping Product Hunt processing.")
+        if not llm_client.api_key:
+            logging.error("LLM_API_KEY not set. Skipping Product Hunt processing.")
             return {}
 
         all_mapped_categories = []
@@ -232,15 +218,10 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                 all_mapped_categories.append(['Other'])
                 continue
             try:
-                response = openai.chat.completions.create(
-                    model="gpt-5",
-                    messages=[
-                        {"role": "system", "content": f"You are a helpful assistant that rates the relevance of product topics to a predefined list of core categories. Your response must be a JSON object where keys are the categories and values are relevance scores from 1 to 10. The categories are: {CORE_CATEGORIES}."},
-                        {"role": "user", "content": f"Rate the relevance of the following topics to the core categories: {product_topics}"}
-                    ],
-                    response_format={ "type": "json_object" }
+                relevance_scores = llm_client.chat_json(
+                    system_prompt=f"You are a helpful assistant that rates the relevance of product topics to a predefined list of core categories. Your response must be a JSON object where keys are the categories and values are relevance scores from 1 to 10. The categories are: {CORE_CATEGORIES}.",
+                    user_message=f"Rate the relevance of the following topics to the core categories: {product_topics}"
                 )
-                relevance_scores = json.loads(response.choices[0].message.content.strip())
                 sorted_categories = sorted(relevance_scores.items(), key=lambda item: item[1], reverse=True)
                 # Map product to top 2 categories with a relevance score > 3
                 product_mapped_categories = [cat for cat, score in sorted_categories[:2] if score > 3]
@@ -297,8 +278,8 @@ Your entire response must be a single, valid JSON object with a single key `hot_
     def process_manifold_predictions_for_bubble_plot(self, predictions_data):
         logging.info("Processing Manifold Markets data for bubble plot...")
         CORE_PREDICTION_CATEGORIES = ["AI", "Blockchain/Crypto", "Science/Research", "Politics/Society", "Economics/Finance", "Technology (General)", "Health", "Other"]
-        if not openai.api_key:
-            logging.error("OPENAI_API_KEY not set. Skipping Manifold processing.")
+        if not llm_client.api_key:
+            logging.error("LLM_API_KEY not set. Skipping Manifold processing.")
             return {}
 
         plot_data = []
@@ -307,15 +288,10 @@ Your entire response must be a single, valid JSON object with a single key `hot_
             title = prediction.get('title', '')
             full_text = f"Title: {title}."
             try:
-                response = openai.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {"role": "system", "content": f"You are a helpful assistant that categorizes prediction market questions into one of the following: {CORE_PREDICTION_CATEGORIES}. If a category is not suitable, use 'Other'. Your response must be a JSON object like {{'category': 'category_name'}}."},
-                        {"role": "user", "content": f"Categorize the following prediction: {full_text}"}
-                    ],
-                    response_format={ "type": "json_object" }
+                llm_output = llm_client.chat_json(
+                    system_prompt=f"You are a helpful assistant that categorizes prediction market questions into one of the following: {CORE_PREDICTION_CATEGORIES}. If a category is not suitable, use 'Other'. Your response must be a JSON object like {{'category': 'category_name'}}.",
+                    user_message=f"Categorize the following prediction: {full_text}"
                 )
-                llm_output = json.loads(response.choices[0].message.content.strip())
                 category = llm_output.get('category', 'Other')
                 if category not in CORE_PREDICTION_CATEGORIES:
                     category = "Other"

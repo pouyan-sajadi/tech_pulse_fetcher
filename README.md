@@ -32,7 +32,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 - **Data Fetching**: `TechPulseFetcher` class
 - **Data Processing**: `DataProcessor` class
 - **Database**: Supabase (PostgreSQL)
-- **AI/ML**: OpenAI GPT-4 for analysis
+- **AI/ML**: OpenAI-compatible LLM gateway (CheaperInference) for analysis
 - **Workflow Orchestration**: `main.py`
 - **Automation**: GitHub Actions
 
@@ -40,7 +40,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 
 - Python 3.9+
 - Supabase Project
-- OpenAI API key
+- CheaperInference API key and model
 - Product Hunt API token (optional, falls back to RSS)
 
 ## 🔧 Installation & Usage
@@ -67,11 +67,15 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 4.  **Set up environment variables:**
     Create a `.env` file in the root directory and add your API keys and Supabase credentials:
     ```
-    OPENAI_API_KEY="your_openai_api_key"
+    LLM_API_KEY="your_cheaperinference_api_key"
+    LLM_BASE_URL="https://api.cheaperinference.com/v1"
+    LLM_MODEL="deepseek-v4-pro"
     PRODUCT_HUNT_TOKEN="your_product_hunt_token" # Optional
     SUPABASE_URL="your_supabase_url"
     SUPABASE_KEY="your_supabase_key"
     ```
+
+    The LLM client uses the OpenAI-compatible API transport, but does not connect to OpenAI directly. Configure the gateway URL, key, and model through the `LLM_*` variables.
 
 ### Running the Workflow Manually
 
@@ -92,7 +96,9 @@ This project uses a GitHub Actions workflow defined in `.github/workflows/daily-
 
 For the automated workflow to function, you must configure the following secrets in your GitHub repository's settings (**Settings > Secrets and variables > Actions**):
 
-- `OPENAI_API_KEY`
+- `LLM_API_KEY`
+- `LLM_BASE_URL`
+- `LLM_MODEL`
 - `PRODUCT_HUNT_TOKEN` (optional)
 - `SUPABASE_URL`
 - `SUPABASE_KEY`
