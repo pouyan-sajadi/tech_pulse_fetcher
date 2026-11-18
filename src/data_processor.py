@@ -222,13 +222,17 @@ Your entire response must be a single, valid JSON object with a single key `hot_
                     system_prompt=f"You are a helpful assistant that rates the relevance of product topics to a predefined list of core categories. Your response must be a JSON object where keys are the categories and values are relevance scores from 1 to 10. The categories are: {CORE_CATEGORIES}.",
                     user_message=f"Rate the relevance of the following topics to the core categories: {product_topics}"
                 )
-                sorted_categories = sorted(relevance_scores.items(), key=lambda item: item[1], reverse=True)
-                # Map product to top 2 categories with a relevance score > 3
-                product_mapped_categories = [cat for cat, score in sorted_categories[:2] if score > 3]
-                if not product_mapped_categories:
-                    all_mapped_categories.append(['Other'])
-                else:
-                    all_mapped_categories.append(product_mapped_categories)
+                # Rank only categories that can appear as chart nodes.
+                qualified_scores = (
+                    (category, score)
+                    for category, score in relevance_scores.items()
+                    if category in CORE_CATEGORIES
+                    and isinstance(score, (int, float))
+                    and 3 < score <= 10
+                )
+                sorted_categories = sorted(qualified_scores, key=lambda item: item[1], reverse=True)
+                product_mapped_categories = [category for category, _ in sorted_categories[:2]]
+                all_mapped_categories.append(product_mapped_categories or ["Other"])
             except Exception as e:
                 logging.error(f"Error mapping topics for product {product.get('title')}: {e}")
                 all_mapped_categories.append(["Other"])
