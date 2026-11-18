@@ -2,6 +2,7 @@ import json
 from collections import Counter
 import re
 import os
+from urllib.parse import urlsplit
 from src.llm_client import llm_client
 from dotenv import load_dotenv
 import logging
@@ -136,65 +137,101 @@ Your entire output must be a single, valid JSON object with a `keywords` key. Ad
                 user_message=f"From the following list of words and their counts, generate the keywords JSON for the word cloud: {llm_input_words}"
             )
 
-            # --- LLM Call 2: Curate Top News Stories ---
-            logging.info("Sending summarized RSS feed data to LLM for top news curation...")
-            
-            # Prepare data for LLM Call 2
-            summarized_rss_data = [{"title": article.get('title', ''), "description": article.get('description', '')} for article in rss_data if article]
-            
-            trending_news_system_prompt = {
-                "role": "system",
-                "content": """You are the Chief Editor of 'The Daily Signal', a prestigious daily tech newsletter. Your mission is to analyze a collection of today's tech article summaries and curate the definitive 'Top 5 Most Significant Stories'.
-
-**Your Curation Heuristics:**
-1.  **Identify Major Themes & Avoid Redundancy:** Scan all summaries to find overlapping stories. Your Top 5 should represent five *distinct* events or trends.
-2.  **Rank by Impact:** Prioritize major product launches, significant research breakthroughs, and major industry shifts.
-3.  **Synthesize and Summarize:** For each topic, write a new, concise `summary` explaining what happened and why it's important.
-4.  **Assess `momentum`:** Based on the intensity of discussion in today's news, label the topic's momentum as `Intense` (dominating headlines), `Growing` (emerging and gaining traction), or `Steady` (important ongoing conversation).
-
-**Output Format:**
-Your entire response must be a single, valid JSON object with a single key `hot_topics`. The array should contain 3 to 5 topic objects.
-
-```json
-{
-  "hot_topics": [
-    {
-      "topic": "The Generative Video Arms Race",
-      "summary": "OpenAI's Sora model is driving intense discussion and competition, with rivals racing to release comparable text-to-video technologies.",
-      "momentum": "Intense"
-    },
-    {
-      "topic": "Nvidia's Next-Gen AI Hardware",
-      "summary": "The announcement of the Blackwell GPU architecture sets a new benchmark for AI computation, aiming to solidify Nvidia's market dominance.",
-      "momentum": "Intense"
-    },
-    {
-      "topic": "The Consolidation of AI Assistants",
-      "summary": "Recent acquisitions and feature integrations suggest the market for standalone AI assistants is maturing and consolidating around major tech players.",
-      "momentum": "Growing"
-    }
-  ]
-}
-```"""
-            }
-
-            trending_news_output = llm_client.chat_json(
-                system_prompt=trending_news_system_prompt,
-                user_message=f"Analyze the following tech news summaries and curate the hot topics JSON: {json.dumps(summarized_rss_data)}"
-            )
-
-            # --- Combine Outputs ---
             final_output = {
                 "keywords": word_cloud_output.get("keywords", []),
-                "hot_topics": trending_news_output.get("hot_topics", [])
+                "hot_topics": self._curate_news_brief(rss_data),
             }
             
-            logging.info("Successfully processed RSS feed data with two LLM calls.")
+            logging.info("Successfully processed RSS feed data.")
             return final_output
 
         except Exception as e:
             logging.error(f"Error processing RSS feeds with LLM: {e}")
             return {}
+
+    def _curate_news_brief(self, rss_data):
+        articles_by_id = {}
+        prompt_articles = []
+        seen_urls = set()
+
+        for article in rss_data:
+            if not article or not isinstance(article.get("url"), str):
+                continue
+            url = article["url"].strip()
+            if url in seen_urls:
+                continue
+            try:
+                parsed_url = urlsplit(url)
+                hostname = parsed_url.hostname
+                if parsed_url.scheme not in {"https", "http"} or not hostname:
+                    continue
+                if parsed_url.username is not None or parsed_url.password is not None:
+                    continue
+            except ValueError:
+                continue
+
+            seen_urls.add(url)
+            article_id = f"article-{len(articles_by_id) + 1}"
+            title = article.get("title") or hostname
+            source = (article.get("source") or "").removeprefix("RSS - ")
+            articles_by_id[article_id] = {"title": title, "source": source, "url": url}
+            prompt_articles.append({
+                "id": article_id,
+                "title": title,
+                "description": article.get("description", ""),
+            })
+
+        if not prompt_articles:
+            logging.warning("No RSS articles with usable links for the Daily News Brief.")
+            return []
+
+        logging.info("Sending RSS article summaries to the LLM for news curation...")
+        response = llm_client.chat_json(
+            system_prompt="""Curate up to five distinct tech news stories from the supplied articles.
+Rank stories by impact and summarize what happened and why it matters in a few sentences.
+Base every claim on the supplied summaries. For each story, list one to three exact article IDs
+from the input that support the summary, and omit stories without supporting articles.
+Return only a JSON object of this shape:
+{"hot_topics":[{"topic":"Story title","summary":"What happened and why it matters",
+"momentum":"Growing","source_ids":["article-1"]}]}
+Use Intense, Growing, or Steady for momentum.""",
+            user_message=json.dumps(prompt_articles),
+        )
+
+        proposed_stories = response.get("hot_topics")
+        if not isinstance(proposed_stories, list):
+            logging.warning("The news curation response did not contain a story list.")
+            return []
+
+        stories = []
+        for story in proposed_stories:
+            if not isinstance(story, dict):
+                continue
+            title = story.get("topic")
+            summary = story.get("summary")
+            source_ids = story.get("source_ids")
+            if not isinstance(title, str) or not title.strip():
+                continue
+            if not isinstance(summary, str) or not summary.strip() or not isinstance(source_ids, list):
+                continue
+
+            matched_ids = list(dict.fromkeys(
+                source_id for source_id in source_ids
+                if isinstance(source_id, str) and source_id in articles_by_id
+            ))[:3]
+            if not matched_ids:
+                continue
+            stories.append({
+                "topic": title.strip(),
+                "summary": summary.strip(),
+                "momentum": story.get("momentum"),
+                "sources": [articles_by_id[source_id] for source_id in matched_ids],
+            })
+            if len(stories) == 5:
+                break
+
+        logging.info("Retained %d news stories with RSS sources.", len(stories))
+        return stories
 
     def process_product_hunt_for_sankey(self, product_hunt_data):
         """
