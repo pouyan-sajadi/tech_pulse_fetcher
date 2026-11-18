@@ -15,10 +15,21 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Check out Last30Days v4.3.2
+        id: last30days
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          repository: mvanhorn/last30days-skill
+          ref: 488e50d9ea1f22302601d1bd61696a4532ec73d7
+          path: .last30days
+          persist-credentials: false
+          sparse-checkout: skills/last30days
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11' 
+          python-version: '3.12'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -31,4 +42,5 @@ jobs:
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           PRODUCT_HUNT_TOKEN: ${{ secrets.PRODUCT_HUNT_TOKEN }}
+          LAST30DAYS_SCRIPT: ${{ steps.last30days.outcome == 'success' && format('{0}/.last30days/skills/last30days/scripts/last30days.py', github.workspace) || '' }}
         run: python main.py
