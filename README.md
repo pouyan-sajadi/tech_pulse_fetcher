@@ -17,6 +17,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 
 - **Automated Daily Updates**: Fresh data every morning via GitHub Actions.
 - **AI-Powered Analysis**: LLMs extract insights, not just data.
+- **Daily Market Deep Dive**: One selected news story with cited business analysis and a longer-term outlook.
 - **Centralized Data Storage**: Processed data is stored in a Supabase PostgreSQL database.
 - **Interactive Visualizations**:
   - Programming language trends (GitHub)
@@ -38,7 +39,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 
 ## 📋 Prerequisites
 
-- Python 3.9+
+- Python 3.12, matching the daily workflow
 - Supabase Project
 - CheaperInference API key and model
 - Product Hunt API token (optional, falls back to RSS)
@@ -50,7 +51,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/pouyan-sajadi/tech_pulse_fetcher.git
-    cd tech-pulse-fetcher
+    cd tech_pulse_fetcher
     ```
 
 2.  **Create a virtual environment:**
@@ -88,7 +89,16 @@ python main.py
 This will:
 1. Fetch data from all sources.
 2. Process the data using the `DataProcessor` class.
-3. Save the final, processed data to your Supabase database.
+3. Generate a market deep dive when Last30Days is configured and the evidence supports one.
+4. Save the processed snapshot to your Supabase database.
+
+### Daily Market Deep Dive
+
+Pulse asks the LLM to select one market story from today's news using the past week's briefs as context. It runs [Last30Days](https://github.com/mvanhorn/last30days-skill) over a 30-day window using public Hacker News and Reddit results. The LLM uses the original coverage and research to write a one-sentence takeaway, a short sequence of events, the business impact, and a conditional outlook for the next year and the next two to three years.
+
+The snapshot stores this optional brief as `pulse_data.market_deep_dive`. The summary and each point have structured source IDs that resolve to article URLs in the brief's `sources` array. The [HeySignal frontend](https://github.com/pouyan-sajadi/signal-news-frontend) displays those IDs as inline article links. If a draft runs long, Pulse asks for a shorter draft once. The regular brief still publishes when research is unavailable or a deep dive fails validation.
+
+GitHub Actions checks out the pinned Last30Days revision in [the daily workflow](.github/workflows/daily-pulse.yml) and sets `LAST30DAYS_SCRIPT`. To enable the deep dive locally, check out the same revision and set `LAST30DAYS_SCRIPT` to the absolute path to its `skills/last30days/scripts/last30days.py`. The public research sources use no extra API keys.
 
 ### Automated Workflow
 
@@ -108,6 +118,7 @@ For the automated workflow to function, you must configure the following secrets
 - `main.py`: The main entry point for the data processing workflow.
 - `src/tech_pulse_fetcher.py`: Contains the `TechPulseFetcher` class for fetching data from various sources.
 - `src/data_processor.py`: Contains the `DataProcessor` class for processing the fetched data.
+- `src/market_deep_dive.py`: Selects and researches a market story, then validates the brief and sources.
 - `.github/workflows/daily-pulse.yml`: The GitHub Actions workflow for daily execution.
 - `requirements.txt`: A list of the Python dependencies for the project.
 - `logs/`: Contains log files for debugging.
