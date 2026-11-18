@@ -1,8 +1,10 @@
 import logging
 import json
 import os
+from datetime import datetime, timedelta, timezone
 from src.tech_pulse_fetcher import TechPulseFetcher
 from src.data_processor import DataProcessor
+from src.market_deep_dive import generate_market_deep_dive
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
@@ -15,6 +17,52 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Supabase configuration
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+def recent_market_briefs():
+    if not SUPABASE_URL or not SUPABASE_KEY:
+        return []
+    today = datetime.now(timezone.utc).date()
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        response = (
+            supabase.table("tech_pulses")
+            .select("created_at,pulse_data")
+            .gte("created_at", f"{today - timedelta(days=7)}T00:00:00Z")
+            .lt("created_at", f"{today}T00:00:00Z")
+            .order("created_at", desc=True)
+            .limit(25)
+            .execute()
+        )
+    except Exception:
+        logging.warning("Could not load prior briefs for market story selection.")
+        return []
+
+    by_day = {}
+    for row in response.data:
+        day = row["created_at"][:10]
+        if day in by_day:
+            continue
+        pulse = row.get("pulse_data")
+        if isinstance(pulse, str):
+            try:
+                pulse = json.loads(pulse)
+            except json.JSONDecodeError:
+                continue
+        if not isinstance(pulse, dict):
+            continue
+        news = pulse.get("news_word_cloud") or {}
+        topics = news.get("hot_topics", []) if isinstance(news, dict) else []
+        headlines = [
+            item["topic"][:160] for item in topics
+            if isinstance(item, dict) and isinstance(item.get("topic"), str)
+        ][:5] if isinstance(topics, list) else []
+        lead = pulse.get("market_deep_dive")
+        if isinstance(lead, dict) and isinstance(lead.get("headline"), str):
+            headlines.insert(0, lead["headline"][:160])
+        if headlines:
+            by_day[day] = headlines
+    return [{"date": day, "headlines": headlines} for day, headlines in by_day.items()]
+
 
 def save_data_to_supabase(data: dict):
     if not SUPABASE_URL or not SUPABASE_KEY:
@@ -59,13 +107,24 @@ def main():
     if fetched_data.get('predictions'):
         processed_data['manifold_predictions_bubble_plot'] = processor.process_manifold_predictions_for_bubble_plot(fetched_data['predictions'])
 
+    stories = processed_data.get("news_word_cloud", {}).get("hot_topics", [])
+    research_script = os.getenv("LAST30DAYS_SCRIPT")
+    if stories and research_script:
+        try:
+            deep_dive = generate_market_deep_dive(
+                stories, recent_market_briefs(), research_script, fetched_data["rss_articles"]
+            )
+            if deep_dive:
+                processed_data["market_deep_dive"] = deep_dive
+        except Exception as exc:
+            logging.warning("Market deep dive skipped (%s). Publishing the regular brief.", type(exc).__name__)
+
     # Save processed data to a local JSON file
     if processed_data:
         # Ensure the directory exists
         os.makedirs("processed_data", exist_ok=True)
         
         # Generate a unique filename with a timestamp
-        from datetime import datetime
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         file_path = f"processed_data/tech_pulse_processed_{timestamp}.json"
         

@@ -33,9 +33,14 @@ class LLMClient:
             self._client = OpenAI(api_key=self.api_key, base_url=self.base_url)
         return self._client
 
-    def chat_json(self, system_prompt: Any, user_message: Any) -> dict[str, Any]:
+    def chat_json(
+        self, system_prompt: Any, user_message: Any, *, timeout: float | None = None
+    ) -> dict[str, Any]:
         """Send a JSON-mode chat request and return its decoded object."""
-        response = self._get_client().chat.completions.create(
+        client = self._get_client()
+        if timeout is not None:
+            client = client.with_options(timeout=timeout, max_retries=0)
+        response = client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": self._content(system_prompt)},
