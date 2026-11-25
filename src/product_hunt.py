@@ -21,7 +21,7 @@ POSTS_QUERY = """
 query todaysPosts($first: Int!) {
   posts(order: VOTES, first: $first) {
     edges { node {
-      name tagline description votesCount commentsCount url website
+      name slug tagline description votesCount commentsCount url website
       topics { edges { node { name } } }
     } }
   }
@@ -146,6 +146,7 @@ async def fetch_graphql(token, url, limit):
         tagline = text_field(node.get("tagline"))
         products.append({
             "source": "Product Hunt", "title": title, "url": url,
+            "launch_slug": text_field(node.get("slug")) or launch_slug(url),
             "tagline": tagline, "description": text_field(node.get("description")) or tagline,
             "website": text_field(node.get("website")), "votes": node.get("votesCount"),
             "comments": node.get("commentsCount"), "topics": named_topics(topic_nodes),
@@ -211,7 +212,8 @@ async def collect_product_hunt(token, graphql_url, limit):
     }
     if mcp.items and graphql.items:
         a = [slug for item in mcp.items if (slug := launch_slug(item["url"]))]
-        b = [slug for item in graphql.items if (slug := launch_slug(item["url"]))]
-        log.update(shared_launches=len(set(a) & set(b)), mcp_launches=a, graphql_launches=b)
+        b = [item["launch_slug"] for item in graphql.items if item.get("launch_slug")]
+        shared = len(set(a) & set(b)) if len(b) == len(graphql.items) else None
+        log.update(shared_launches=shared, mcp_launches=a, graphql_launches=b)
     logging.info("product_hunt_comparison %s", json.dumps(log, sort_keys=True))
     return providers[selected].items if selected else []

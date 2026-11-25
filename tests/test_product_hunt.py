@@ -55,8 +55,9 @@ class GraphQLTest(unittest.IsolatedAsyncioTestCase):
             body = json.loads(request.content)
             self.assertEqual(body["variables"], {"first": 10})
             self.assertIn("posts(order: VOTES", body["query"])
+            self.assertIn("slug", body["query"].split())
             return httpx.Response(200, json={"data": {"posts": {"edges": [None, {"node": {
-                "name": "Example", "url": "https://www.producthunt.com/products/app/launches/v2",
+                "name": "Example", "url": "https://www.producthunt.com/products/app", "slug": "app-v2",
                 "description": "Full description", "votesCount": 17, "commentsCount": 2,
                 "topics": {"edges": [{"node": {"name": "Design"}}]},
             }}]}}})
@@ -67,6 +68,7 @@ class GraphQLTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(outcome.status, "ok")
         self.assertEqual(len(outcome.items), 1)
         product = outcome.items[0]
+        self.assertEqual(product["launch_slug"], "app-v2")
         self.assertEqual((product["votes"], product["topics"], product["description"]),
                          (17, ["Design"], "Full description"))
 
@@ -107,10 +109,17 @@ class SourceSelectionTest(unittest.TestCase):
 
     def test_mcp_is_only_selected_batch_and_same_launch_is_counted(self):
         a = [{"url": "https://www.producthunt.com/posts/one?ref=mcp"}]
-        b = [{"url": "https://www.producthunt.com/products/parent/launches/one?ref=api"}]
+        b = [{"url": "https://www.producthunt.com/products/parent?ref=api", "launch_slug": "one"}]
         result, event, rss_calls = self.fetch(a, b, [])
         self.assertIs(result, a)
         self.assertEqual((event["selected"], event["shared_launches"], rss_calls), ("mcp", 1, 0))
+
+    def test_overlap_unknown_if_a_launch_cannot_be_identified(self):
+        a = [{"url": "https://www.producthunt.com/posts/one"}]
+        b = [{"url": "https://www.producthunt.com/products/parent", "launch_slug": None}]
+        result, event, _ = self.fetch(a, b, [])
+        self.assertIs(result, a)
+        self.assertIsNone(event["shared_launches"])
 
     def test_single_mcp_row_survives_graphql_failure(self):
         mcp = [{"url": "https://www.producthunt.com/posts/one"}]
