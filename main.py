@@ -6,6 +6,7 @@ from src.tech_pulse_fetcher import TechPulseFetcher
 from src.data_processor import DataProcessor
 from src.market_deep_dive import generate_market_deep_dive
 from src.market_diagnostics import MarketDiagnostics
+from src.product_hunt import top_daily_launches
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
@@ -92,7 +93,10 @@ def run_pulse(diagnostics):
         if fetched_data.get('rss_articles'):
             processed_data['news_word_cloud'] = processor.process_rss_feeds_for_wordcloud(fetched_data['rss_articles'])
         if fetched_data.get('product_hunt'):
-            processed_data['product_hunt_tag_connections'] = processor.process_product_hunt_for_sankey(fetched_data['product_hunt'])
+            launches = fetched_data['product_hunt']
+            if leaderboard := top_daily_launches(launches):
+                processed_data['product_hunt_leaderboard'] = leaderboard
+            processed_data['product_hunt_tag_connections'] = processor.process_product_hunt_for_sankey(launches)
         if fetched_data.get('predictions'):
             processed_data['manifold_predictions_bubble_plot'] = processor.process_manifold_predictions_for_bubble_plot(fetched_data['predictions'])
 
