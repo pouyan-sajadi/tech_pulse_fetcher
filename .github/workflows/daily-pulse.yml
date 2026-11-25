@@ -1,9 +1,10 @@
 name: Run Daily Tech Pulse Monitor
 
 on:
-  # Runs once a day at 1 AM UTC. 
+  # Runs every day at 9:30 a.m. Toronto time.
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '30 9 * * *'
+      timezone: 'America/Toronto'
   # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 

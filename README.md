@@ -96,13 +96,13 @@ This will:
 
 Pulse asks the LLM to select one market story from today's news using the past week's briefs as context. It runs [Last30Days](https://github.com/mvanhorn/last30days-skill) over a 30-day window using public Hacker News and Reddit results. The LLM uses the original coverage and research to write a one-sentence takeaway, a short sequence of events, the business impact, and a conditional outlook for the next year and the next two to three years.
 
-The snapshot stores this optional brief as `pulse_data.market_deep_dive`. The summary and each point have structured source IDs that resolve to article URLs in the brief's `sources` array. The [HeySignal frontend](https://github.com/pouyan-sajadi/signal-news-frontend) displays those IDs as inline article links. If a draft runs long, Pulse asks for a shorter draft once. The regular brief still publishes when research is unavailable or a deep dive fails validation.
+The snapshot stores this optional brief as `pulse_data.market_deep_dive`. The summary and each point have structured source IDs that resolve to article URLs in the brief's `sources` array. The [HeySignal frontend](https://github.com/pouyan-sajadi/signal-news-frontend) displays those IDs as inline article links. Pulse logs the draft’s validation failures and gives the model one chance to repair them using the same evidence. The regular brief publishes when research is unavailable or neither draft passes.
 
 GitHub Actions checks out the pinned Last30Days revision in [the daily workflow](.github/workflows/daily-pulse.yml) and sets `LAST30DAYS_SCRIPT`. To enable the deep dive locally, check out the same revision and set `LAST30DAYS_SCRIPT` to the absolute path to its `skills/last30days/scripts/last30days.py`. The public research sources use no extra API keys.
 
 ### Automated Workflow
 
-This project uses a GitHub Actions workflow defined in `.github/workflows/daily-pulse.yml` to run the `main.py` script automatically every day at 1 AM UTC.
+The [daily workflow](.github/workflows/daily-pulse.yml) schedules `main.py` every day at 9:30 a.m. Toronto time, including weekends. The schedule follows Toronto’s daylight saving time.
 
 For the automated workflow to function, you must configure the following secrets in your GitHub repository's settings (**Settings > Secrets and variables > Actions**):
 
