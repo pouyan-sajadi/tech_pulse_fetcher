@@ -1,10 +1,12 @@
 import json
 from pathlib import Path
+import subprocess
 import unittest
 from unittest.mock import Mock, patch
 
 from src.llm_client import InvalidLLMResponse, LLMClient
 from src.market_deep_dive import BriefValidationError, generate_market_deep_dive, normalize_brief
+from src.market_diagnostics import MarketDiagnostics
 
 
 ASSIGNMENT = {
@@ -97,7 +99,8 @@ class DraftRepairTests(unittest.TestCase):
         for reason in ("summary_source_ids must include", "outlook missing usable horizons counter"):
             self.assertIn(reason, repair["validation_failures"])
             self.assertIn(reason, "\n".join(logs.output))
-        self.assertIn("included in snapshot (draft 2/2)", "\n".join(logs.output))
+        self.assertIn('"stage": "draft", "outcome": "ok"', logs.output[-1])
+        self.assertIn('"attempt": 2', logs.output[-1])
 
     def test_invalid_json_gets_one_repair(self):
         client = LLMClient()
@@ -124,9 +127,10 @@ class DraftRepairTests(unittest.TestCase):
         with self.assertLogs(level="WARNING") as logs:
             self.assertIsNone(self.generate())
         self.assertEqual(self.chat.call_count, 3)
-        self.assertIn("draft 1/2 failed (draft returned skip=true)", logs.output[0])
-        self.assertIn("draft 2/2 failed (summary exceeds 300 characters (301))", logs.output[1])
-        self.assertIn("Publishing the regular brief", logs.output[1])
+        self.assertIn('"attempt": 1', logs.output[0])
+        self.assertIn("draft returned skip=true", logs.output[0])
+        self.assertIn('"attempt": 2', logs.output[1])
+        self.assertIn("summary exceeds 300 characters (301)", logs.output[1])
 
     def test_missing_research_skips_drafting(self):
         self.chat.side_effect = [ASSIGNMENT]
@@ -134,4 +138,27 @@ class DraftRepairTests(unittest.TestCase):
         with self.assertLogs(level="INFO") as logs:
             self.assertIsNone(self.generate())
         self.chat.assert_called_once()
-        self.assertIn("missing evidence of type research", logs.output[0])
+        self.assertIn('"reason": "insufficient_evidence"', logs.output[-1])
+        self.assertIn('"missing_kinds": ["research"]', logs.output[-1])
+
+    def test_no_qualifying_story_and_invalid_assignment_are_distinct(self):
+        for assignment, outcome, reason in (
+            ({"story_id": None}, "skipped", "no_qualifying_story"),
+            ({"story_id": 99}, "rejected", "invalid_assignment"),
+        ):
+            with self.subTest(reason=reason):
+                self.chat.side_effect = [assignment]
+                diagnostics = MarketDiagnostics()
+                self.assertIsNone(generate_market_deep_dive(STORIES, [], Path(__file__), [], diagnostics=diagnostics))
+                self.assertEqual(diagnostics.events[-1]["outcome"], outcome)
+                self.assertEqual(diagnostics.events[-1]["reason"], reason)
+        self.research.assert_not_called()
+
+    def test_research_failure_logs_exit_code_without_command_or_output(self):
+        self.chat.side_effect = [ASSIGNMENT]
+        self.research.side_effect = subprocess.CalledProcessError(2, ["private-query"], stderr="private-stderr")
+        with self.assertLogs(level="WARNING") as logs, self.assertRaises(subprocess.CalledProcessError):
+            self.generate()
+        self.assertIn('"stage": "research", "outcome": "failed"', logs.output[-1])
+        self.assertIn('"exit_code": 2', logs.output[-1])
+        self.assertNotIn("private-", logs.output[-1])

@@ -100,6 +100,10 @@ The snapshot stores this optional brief as `pulse_data.market_deep_dive`. The su
 
 GitHub Actions checks out the pinned Last30Days revision in [the daily workflow](.github/workflows/daily-pulse.yml) and sets `LAST30DAYS_SCRIPT`. To enable the deep dive locally, check out the same revision and set `LAST30DAYS_SCRIPT` to the absolute path to its `skills/last30days/scripts/last30days.py`. The public research sources use no extra API keys.
 
+When the deep dive is missing, open that day’s Actions run and check **Market Deep Dive** in the job summary. Search the job log for `market_deep_dive` to see the run ID, stage timings, Last30Days checkout outcome and results by source, usable evidence counts, draft validation failures, and whether Supabase acknowledged the snapshot. The structured events record counts, error codes, and validation rules. They omit credentials, article text, search queries, and model replies.
+
+If the run list has no entry for the day, check the schedule and the date of the latest dashboard snapshot. A published regular snapshot and a missing scheduled run are separate outcomes. If the publish step fails, resolve that error before rerunning. Use **Run workflow** to publish a fresh snapshot when a manual recovery is needed.
+
 ### Automated Workflow
 
 The [daily workflow](.github/workflows/daily-pulse.yml) schedules `main.py` every day at 9:30 a.m. Toronto time, including weekends. The schedule follows Toronto’s daylight saving time.

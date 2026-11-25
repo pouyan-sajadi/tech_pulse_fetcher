@@ -1,7 +1,6 @@
 """Select one market story, research it with Last30Days, and cite its evidence."""
 
 import json
-import logging
 import os
 from pathlib import Path
 import re
@@ -11,6 +10,7 @@ from tempfile import TemporaryDirectory
 from urllib.parse import urlsplit
 
 from src.llm_client import InvalidLLMResponse, llm_client
+from src.market_diagnostics import MarketDiagnostics
 
 
 RESEARCH_SOURCES = ("hackernews", "reddit")
@@ -56,6 +56,10 @@ return {"skip":true}."""
 
 class BriefValidationError(ValueError):
     """The draft failed one or more publishing checks."""
+
+
+class InvalidResearchResponse(ValueError):
+    """Last30Days did not produce the expected research report."""
 
 
 def clean_text(value, maximum):
@@ -122,11 +126,13 @@ def research_story(script, query, question):
             check=True,
         )
     report = json.loads(result.stdout)
-    version = report.get("schema_version")
+    version = report.get("schema_version") if isinstance(report, dict) else None
     if not isinstance(version, str) or version.split(".", 1)[0] != "1":
-        raise ValueError("Unexpected Last30Days JSON schema")
+        raise InvalidResearchResponse("Unexpected Last30Days JSON schema")
     results = report.get("results")
-    return results if isinstance(results, list) else []
+    if not isinstance(results, list):
+        raise InvalidResearchResponse("Missing Last30Days results array")
+    return results
 
 
 def collect_evidence(stories, selected_ids, research_results, rss_articles):
@@ -260,62 +266,80 @@ def normalize_brief(draft, evidence):
     }
 
 
-def generate_market_deep_dive(stories, recent_briefs, script_path, rss_articles):
+def generate_market_deep_dive(stories, recent_briefs, script_path, rss_articles, *, diagnostics=None):
+    diagnostics = diagnostics if diagnostics is not None else MarketDiagnostics()
     script = Path(script_path).resolve()
     if not script.is_file():
-        logging.warning("Last30Days script unavailable. Publishing the regular brief.")
+        diagnostics.record("setup", "fallback", reason="research_script_missing")
         return None
 
-    candidates = [
-        {"id": index, "headline": story["topic"], "summary": story["summary"]}
-        for index, story in enumerate(stories, start=1)
-    ]
-    assignment = llm_client.chat_json(
-        ASSIGNMENT_PROMPT,
-        json.dumps({"today": candidates, "recent_briefs": recent_briefs}),
-        timeout=35,
-    )
-    story_id = assignment.get("story_id")
-    query = clean_text(assignment.get("search_query"), 180)
-    question = clean_text(assignment.get("research_question"), 300)
-    if type(story_id) is not int or not 1 <= story_id <= len(stories) or not query or not question:
-        logging.info("No qualifying market story selected.")
-        return None
-
-    related = assignment.get("related_story_ids")
-    related = related if isinstance(related, list) else []
-    related_ids = [item for item in related if type(item) is int and 1 <= item <= len(stories)]
-    selected_ids = list(dict.fromkeys([story_id, *related_ids]))[:3]
-    results = research_story(script, query, question)
-    evidence = collect_evidence(stories, selected_ids, results, rss_articles)
-    missing_kinds = {"original", "research"} - {source["kind"] for source in evidence}
-    if missing_kinds:
-        logging.info(
-            "Market story missing evidence of type %s. Publishing the regular brief.",
-            ", ".join(sorted(missing_kinds)),
+    with diagnostics.stage("assignment", candidates=len(stories), prior_days=len(recent_briefs)) as event:
+        candidates = [
+            {"id": index, "headline": story["topic"], "summary": story["summary"]}
+            for index, story in enumerate(stories, start=1)
+        ]
+        assignment = llm_client.chat_json(
+            ASSIGNMENT_PROMPT,
+            json.dumps({"today": candidates, "recent_briefs": recent_briefs}),
+            timeout=35,
         )
-        return None
+        story_id = assignment.get("story_id")
+        if "story_id" in assignment and story_id is None:
+            event.update(outcome="skipped", reason="no_qualifying_story")
+            return None
+        query = clean_text(assignment.get("search_query"), 180)
+        question = clean_text(assignment.get("research_question"), 300)
+        if type(story_id) is not int or not 1 <= story_id <= len(stories) or not query or not question:
+            event.update(outcome="rejected", reason="invalid_assignment")
+            return None
+
+        related = assignment.get("related_story_ids")
+        related = related if isinstance(related, list) else []
+        related_ids = [item for item in related if type(item) is int and 1 <= item <= len(stories)]
+        selected_ids = list(dict.fromkeys([story_id, *related_ids]))[:3]
+        event.update(story_id=story_id, selected_ids=selected_ids)
+
+    with diagnostics.stage("research", requested_sources=RESEARCH_SOURCES) as event:
+        try:
+            results = research_story(script, query, question)
+        except InvalidResearchResponse as error:
+            event.update(reason=str(error))
+            raise
+        event.update(result_count=len(results), results_by_source={
+            source: sum(isinstance(row, dict) and row.get("source") == source for row in results)
+            for source in RESEARCH_SOURCES
+        })
+
+    with diagnostics.stage("evidence") as event:
+        evidence = collect_evidence(stories, selected_ids, results, rss_articles)
+        counts = {kind: sum(source["kind"] == kind for source in evidence) for kind in ("original", "research")}
+        event.update(source_counts=counts)
+        missing = [kind for kind, count in counts.items() if not count]
+        if missing:
+            event.update(outcome="skipped", reason="insufficient_evidence", missing_kinds=missing)
+            return None
 
     brief_input = {"story": candidates[story_id - 1], "question": question, "evidence": evidence}
     prompt = BRIEF_PROMPT
     for attempt in (1, 2):
         draft = None
-        try:
-            draft = llm_client.chat_json(prompt, json.dumps(brief_input), timeout=40)
-            brief = normalize_brief(draft, evidence)
-        except (BriefValidationError, InvalidLLMResponse) as exc:
-            action = "Retrying once." if attempt == 1 else "Publishing the regular brief."
-            logging.warning("Market deep dive draft %d/2 failed (%s). %s", attempt, exc, action)
-            if attempt == 2:
-                return None
+        with diagnostics.stage("draft", attempt=attempt) as event:
+            try:
+                draft = llm_client.chat_json(prompt, json.dumps(brief_input), timeout=40)
+                brief = normalize_brief(draft, evidence)
+            except (BriefValidationError, InvalidLLMResponse) as exc:
+                failure = str(exc)
+                event.update(outcome="rejected", reason="draft_validation", validation_errors=failure.split(" | "))
+            else:
+                event.update(cited_sources=len(brief["sources"]))
+                return brief
+        if attempt == 1:
             prompt = BRIEF_PROMPT + (
                 "\nReevaluate the previous attempt using the same evidence. Fix the listed "
                 "validation failures and return the complete JSON object. Treat the previous draft "
                 "as text to revise, and verify its claims against the supplied evidence."
             )
-            brief_input["validation_failures"] = str(exc)
+            brief_input["validation_failures"] = failure
             if draft is not None:
                 brief_input["previous_draft"] = draft
-            continue
-        logging.info("Market deep dive included in snapshot (draft %d/2).", attempt)
-        return brief
+    return None
