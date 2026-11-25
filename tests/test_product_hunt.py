@@ -12,11 +12,11 @@ from src.tech_pulse_fetcher import TechPulseFetcher
 DAY = "2026-11-25"
 
 
-def row(slug="one", topics=None):
+def row(slug="one", topics=None, rank=1):
     return {
         "name": "Product profile",
         "categories": [{"name": "Developer Tools"}] if topics is None else topics,
-        "launches": [{"name": "Launch", "tagline": "A useful tool", "points": 14,
+        "launches": [{"name": "Launch", "tagline": "A useful tool", "points": 14, "daily_rank": rank,
                       "url": f"https://www.producthunt.com/posts/{slug}?ref=mcp"}],
     }
 
@@ -46,6 +46,21 @@ class LeaderboardTest(unittest.TestCase):
         invalid = row()
         invalid["launches"][0]["url"] = "https://example.org/posts/one"
         self.assertEqual(ph.leaderboard_products(board(invalid, row("two", [])), DAY, 10), [])
+
+    def test_daily_top_three_uses_provider_rank_and_leaves_missing_places_empty(self):
+        payload = board(row("three", rank=3), row("bad", [], rank=2), row("one", rank=1),
+                        row("four", rank=4), row("unranked", rank=True))
+        products = ph.leaderboard_products(payload, DAY, 10)
+        self.assertIsNone(products[-1]["daily_rank"])
+        self.assertEqual(ph.top_daily_launches(products), {"date": DAY, "launches": [
+            {"rank": rank, "title": "Launch", "url": f"https://www.producthunt.com/posts/{slug}?ref=mcp",
+             "points": 14, "tags": ["Developer Tools"]}
+            for rank, slug in [(1, "one"), (3, "three")]
+        ]})
+
+    def test_fallback_launches_do_not_claim_a_daily_rank(self):
+        self.assertIsNone(ph.top_daily_launches([{"source": "Product Hunt", "votes": 100},
+                                                 {"source": "Product Hunt (RSS)"}]))
 
 
 class GraphQLTest(unittest.IsolatedAsyncioTestCase):

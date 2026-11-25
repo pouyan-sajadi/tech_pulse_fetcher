@@ -35,6 +35,27 @@ class PublisherDiagnosticsTests(unittest.TestCase):
         self.assertIn('"has_market_deep_dive": false', combined)
         self.assertIn('"snapshot_created_at": "2026-11-25T14:31:00Z"', combined)
 
+    def test_ranked_launch_metadata_reaches_snapshot_without_chart_output(self):
+        launches = [{
+            "title": "Example", "url": "https://www.producthunt.com/posts/example",
+            "daily_rank": 1, "points": 42, "topics": ["AI Agents"], "leaderboard_date": "2026-11-25",
+        }]
+        publisher.TechPulseFetcher.return_value.fetch_all.return_value = {"product_hunt": launches}
+        chart = publisher.DataProcessor.return_value.process_product_hunt_for_sankey
+        chart.return_value = {}
+
+        with patch.object(publisher, "save_data_to_supabase", return_value="2026-11-25T14:31:00Z") as save:
+            publisher.main()
+
+        chart.assert_called_once_with(launches)
+        save.assert_called_once_with({
+            "product_hunt_tag_connections": {},
+            "product_hunt_leaderboard": {"date": "2026-11-25", "launches": [{
+                "title": "Example", "url": "https://www.producthunt.com/posts/example",
+                "rank": 1, "points": 42, "tags": ["AI Agents"],
+            }]},
+        })
+
     def test_missing_publish_configuration_fails_workflow_and_writes_summary(self):
         with (
             patch.object(publisher, "SUPABASE_URL", None),

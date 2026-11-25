@@ -99,16 +99,42 @@ def leaderboard_products(payload, day, limit):
         tagline = text_field(launch.get("tagline")) or text_field(row.get("tagline"))
         if not slug or slug in seen or not title or not tagline:
             continue
+        rank = launch.get("daily_rank")
+        points = launch.get("points")
         products.append({
             "source": "Product Hunt (MCP)", "title": title, "url": launch["url"],
             "tagline": tagline, "description": tagline, "website": text_field(row.get("website_url")),
-            "topics": topics, "points": launch.get("points"),
+            "topics": topics, "leaderboard_date": day,
+            "daily_rank": rank if type(rank) is int and rank > 0 else None,
+            "points": points if type(points) is int and points >= 0 else None,
             "fetched_at": datetime.now(timezone.utc).isoformat(),
         })
         seen.add(slug)
         if len(products) == limit:
             break
     return products
+
+
+def top_daily_launches(products):
+    """Use Product Hunt's actual daily ranks, including gaps in the first three."""
+    by_rank = {}
+    for product in products:
+        rank = product.get("daily_rank")
+        if rank in (1, 2, 3):
+            by_rank.setdefault(rank, product)
+
+    if not by_rank:
+        return None
+
+    ranked = [by_rank[rank] for rank in sorted(by_rank)]
+    return {
+        "date": ranked[0]["leaderboard_date"],
+        "launches": [
+            {"rank": product["daily_rank"], "title": product["title"], "url": product["url"],
+             "points": product["points"], "tags": product["topics"]}
+            for product in ranked
+        ],
+    }
 
 
 async def fetch_leaderboard(day, limit):
