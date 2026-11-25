@@ -43,5 +43,6 @@ jobs:
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           PRODUCT_HUNT_TOKEN: ${{ secrets.PRODUCT_HUNT_TOKEN }}
+          LAST30DAYS_CHECKOUT_OUTCOME: ${{ steps.last30days.outcome }}
           LAST30DAYS_SCRIPT: ${{ steps.last30days.outcome == 'success' && format('{0}/.last30days/skills/last30days/scripts/last30days.py', github.workspace) || '' }}
         run: python main.py
