@@ -3,7 +3,8 @@ import requests
 import feedparser
 from datetime import datetime
 from bs4 import BeautifulSoup
-import json
+import asyncio
+from src.product_hunt import collect_product_hunt, fetch_rss
 from typing import List, Dict, Optional
 import time
 import os
@@ -29,97 +30,10 @@ class TechPulseFetcher:
         }
 
     def fetch_product_hunt(self, limit: int = 10) -> List[Dict]:
-        logging.info("Fetching Product Hunt data...")
-        if not self.ph_token:
-            logging.warning("No Product Hunt token found. Using fallback method...")
-            return self.fetch_product_hunt_rss(limit)
-        
-        query = """
-        query todaysPosts($first: Int!) {
-          posts(order: VOTES, first: $first) {
-            edges {
-              node {
-                id
-                name
-                tagline
-                description
-                votesCount
-                commentsCount
-                url
-                website
-                createdAt
-                featuredAt
-                topics {
-                  edges {
-                    node {
-                      name
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        """
-        variables = {"first": limit}
-        headers = {
-            'Authorization': f'Bearer {self.ph_token}',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-        
-        try:
-            response = requests.post(self.ph_api_url, json={'query': query, 'variables': variables}, headers=headers)
-            if response.status_code == 200:
-                data = response.json()
-                if 'errors' in data:
-                    logging.error(f"GraphQL errors: {data['errors']}")
-                    return self.fetch_product_hunt_rss(limit)
-                
-                products = []
-                for edge in data.get('data', {}).get('posts', {}).get('edges', []):
-                    node = edge['node']
-                    products.append({
-                        'source': 'Product Hunt',
-                        'title': node['name'],
-                        'tagline': node['tagline'],
-                        'description': node.get('description') or node['tagline'],
-                        'url': node['url'],
-                        'website': node.get('website', ''),
-                        'votes': node['votesCount'],
-                        'comments': node['commentsCount'],
-                        'topics': [t['node']['name'] for t in node.get('topics', {}).get('edges', [])],
-                        'fetched_at': datetime.now().isoformat()
-                    })
-                logging.info(f"Fetched {len(products)} products from Product Hunt API")
-                return products
-            else:
-                logging.error(f"Product Hunt API error: {response.status_code}")
-                return self.fetch_product_hunt_rss(limit)
-        except Exception as e:
-            logging.error(f"Error fetching Product Hunt: {str(e)}")
-            return self.fetch_product_hunt_rss(limit)
+        return asyncio.run(collect_product_hunt(self.ph_token, self.ph_api_url, limit))
 
     def fetch_product_hunt_rss(self, limit: int = 10) -> List[Dict]:
-        logging.info("Using Product Hunt RSS feed as fallback...")
-        try:
-            feed = feedparser.parse('https://www.producthunt.com/feed')
-            products = []
-            for entry in feed.entries[:limit]:
-                description = entry.get('description', '')
-                soup = BeautifulSoup(description, 'html.parser')
-                clean_description = soup.get_text().strip()
-                products.append({
-                    'source': 'Product Hunt (RSS)',
-                    'title': entry.get('title', 'Unknown'),
-                    'description': clean_description,
-                    'url': entry.get('link', ''),
-                    'fetched_at': datetime.now().isoformat()
-                })
-            return products
-        except Exception as e:
-            logging.error(f"Error fetching Product Hunt RSS: {str(e)}")
-            return []
+        return asyncio.run(fetch_rss(limit))
 
     def fetch_github_trending(self, limit: int = 20) -> List[Dict]:
         logging.info("Fetching GitHub trending repos...")

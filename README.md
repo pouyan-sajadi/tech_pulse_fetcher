@@ -42,7 +42,7 @@ Instead of checking multiple sources daily, get everything in one intelligent, v
 - Python 3.12, matching the daily workflow
 - Supabase Project
 - CheaperInference API key and model
-- Product Hunt API token (optional, falls back to RSS)
+- Product Hunt GraphQL token (optional, used for the provider comparison and fallback)
 
 ## 🔧 Installation & Usage
 
@@ -103,6 +103,12 @@ GitHub Actions checks out the pinned Last30Days revision in [the daily workflow]
 When the deep dive is missing, open that day’s Actions run and check **Market Deep Dive** in the job summary. Search the job log for `market_deep_dive` to see the run ID, stage timings, Last30Days checkout outcome and results by source, usable evidence counts, draft validation failures, and whether Supabase acknowledged the snapshot. The structured events record counts, error codes, and validation rules. They omit credentials, article text, search queries, and model replies.
 
 If the run list has no entry for the day, check the schedule and the date of the latest dashboard snapshot. A published regular snapshot and a missing scheduled run are separate outcomes. If the publish step fails, resolve that error before rerunning. Use **Run workflow** to publish a fresh snapshot when a manual recovery is needed.
+
+### Product Hunt provider trial
+
+Each run reads the current Pacific day's official Product Hunt MCP leaderboard and the existing vote-ordered GraphQL feed concurrently. The chart receives the ranked MCP launches with a title, launch link, tagline and at least one named category. One usable launch is enough. When none qualify or the read fails, the collector tries the GraphQL results, then the RSS feed. The collector allows each provider 15 seconds. Only the selected batch goes through chart generation.
+
+Search the workflow log for `product_hunt_comparison` to see which feed supplied the chart, source counts, timings and failure reasons. When both feeds succeed, the event lists launch slugs in rank order and their overlap. GraphQL keeps its existing vote ordering and implicit time window. The MCP leaderboard uses Product Hunt's rank for that Pacific day, and that rank can change during the day. Compare the unique launches and their categories on the dashboard when judging the trial. [Product Hunt MCP](https://www.producthunt.com/mcp/install)
 
 ### Automated Workflow
 
