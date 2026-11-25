@@ -10,7 +10,7 @@ import sys
 from tempfile import TemporaryDirectory
 from urllib.parse import urlsplit
 
-from src.llm_client import llm_client
+from src.llm_client import InvalidLLMResponse, llm_client
 
 
 RESEARCH_SOURCES = ("hackernews", "reddit")
@@ -54,22 +54,22 @@ opinions. Do not invent facts, quotes, dates, or numbers. If the evidence is thi
 return {"skip":true}."""
 
 
-class BriefTooLong(ValueError):
-    """The draft needs a shorter field before it can be published."""
+class BriefValidationError(ValueError):
+    """The draft failed one or more publishing checks."""
 
 
 def clean_text(value, maximum):
     return " ".join(value.split())[:maximum] if isinstance(value, str) else ""
 
 
-def brief_text(value, maximum):
+def brief_text(value, maximum, field, errors):
     if not isinstance(value, str):
         return ""
     text = re.sub(r"\[\s*s\d+(?:\s*,\s*s\d+)*\s*\]", "", value, flags=re.IGNORECASE)
     text = re.sub(r"\s+([.,!?;:])", r"\1", text)
     text = " ".join(text.split())
     if len(text) > maximum:
-        raise BriefTooLong
+        errors.append(f"{field} exceeds {maximum} characters ({len(text)})")
     return text
 
 
@@ -170,9 +170,10 @@ def collect_evidence(stories, selected_ids, research_results, rss_articles):
 
 def normalize_brief(draft, evidence):
     if draft.get("skip") is True:
-        return None
+        raise BriefValidationError("draft returned skip=true")
 
     by_id = {source["id"]: source for source in evidence}
+    errors = []
 
     def source_ids(value):
         if not isinstance(value, list):
@@ -182,41 +183,68 @@ def normalize_brief(draft, evidence):
     def points(section):
         items = draft.get(section)
         if not isinstance(items, list):
-            return []
+            return [], [f"{section} must be an array"]
         normalized = []
-        for item in items[:6]:
+        rejected = []
+        for index, item in enumerate(items[:6]):
+            field = f"{section}[{index}]"
             if not isinstance(item, dict):
+                rejected.append(f"{field} must be an object")
                 continue
-            label = brief_text(item.get("label"), 110)
-            detail = brief_text(item.get("text"), 300)
+            label = brief_text(item.get("label"), 110, f"{field}.label", errors)
+            detail = brief_text(item.get("text"), 300, f"{field}.text", errors)
             refs = source_ids(item.get("source_ids"))
-            if label and detail and refs:
-                point = {"label": label, "text": detail, "source_ids": refs}
-                if section == "outlook":
-                    horizon = item.get("horizon")
-                    if horizon not in HORIZONS:
-                        continue
-                    point["horizon"] = horizon
-                normalized.append(point)
-        return normalized[:3]
+            horizon = item.get("horizon")
+            item_errors = [
+                f"{field}.{name} {message}"
+                for name, valid, message in (
+                    ("label", label, "must be non-empty text"),
+                    ("text", detail, "must be non-empty text"),
+                    ("source_ids", refs, "must include a supplied source ID"),
+                )
+                if not valid
+            ]
+            if section == "outlook" and horizon not in HORIZONS:
+                item_errors.append(f"{field}.horizon must be near, long, or counter")
+            if item_errors:
+                rejected.extend(item_errors)
+                continue
+            point = {"label": label, "text": detail, "source_ids": refs}
+            if section == "outlook":
+                point["horizon"] = horizon
+            normalized.append(point)
+        return normalized[:3], rejected
 
-    headline = brief_text(draft.get("headline"), 110)
-    summary = brief_text(draft.get("summary"), 300)
+    headline = brief_text(draft.get("headline"), 110, "headline", errors)
+    summary = brief_text(draft.get("summary"), 300, "summary", errors)
     summary_refs = source_ids(draft.get("summary_source_ids"))
-    signals, impact = points("signals"), points("impact")
-    outlook_by_horizon = {point["horizon"]: point for point in points("outlook")}
-    if not headline or not summary or not summary_refs or len(signals) < 2 or not impact:
-        return None
-    if not any(by_id[ref]["kind"] == "original" for ref in summary_refs):
-        return None
-    if any(horizon not in outlook_by_horizon for horizon in HORIZONS):
-        return None
-    outlook = [outlook_by_horizon[horizon] for horizon in HORIZONS]
+    signals, signal_errors = points("signals")
+    impact, impact_errors = points("impact")
+    outlook, outlook_errors = points("outlook")
+    outlook_by_horizon = {point["horizon"]: point for point in outlook}
+    if not headline:
+        errors.append("headline must be non-empty text")
+    if not summary:
+        errors.append("summary must be non-empty text")
+    if not summary_refs:
+        errors.append("summary_source_ids must include a supplied source ID")
+    elif not any(by_id[ref]["kind"] == "original" for ref in summary_refs):
+        errors.append("summary_source_ids must cite original coverage")
+    if len(signals) < 2:
+        errors.extend([f"signals requires at least two usable points (found {len(signals)})", *signal_errors])
+    if not impact:
+        errors.extend(["impact requires at least one usable point", *impact_errors])
+    missing_horizons = [horizon for horizon in HORIZONS if horizon not in outlook_by_horizon]
+    if missing_horizons:
+        errors.extend([f"outlook missing usable horizons {', '.join(missing_horizons)}", *outlook_errors])
+
     cited_ids = set(summary_refs)
-    for point in [*signals, *impact, *outlook]:
+    for point in [*signals, *impact, *outlook_by_horizon.values()]:
         cited_ids.update(point["source_ids"])
-    if {by_id[ref]["kind"] for ref in cited_ids} != {"original", "research"}:
-        return None
+    if not any(by_id[ref]["kind"] == "research" for ref in cited_ids):
+        errors.append("brief must cite at least one research source")
+    if errors:
+        raise BriefValidationError(" | ".join(errors))
 
     return {
         "headline": headline,
@@ -224,7 +252,7 @@ def normalize_brief(draft, evidence):
         "summary_source_ids": summary_refs,
         "signals": signals,
         "impact": impact,
-        "outlook": outlook,
+        "outlook": [outlook_by_horizon[horizon] for horizon in HORIZONS],
         "sources": [
             {key: value for key, value in source.items() if key != "context"}
             for source in evidence if source["id"] in cited_ids
@@ -260,20 +288,34 @@ def generate_market_deep_dive(stories, recent_briefs, script_path, rss_articles)
     selected_ids = list(dict.fromkeys([story_id, *related_ids]))[:3]
     results = research_story(script, query, question)
     evidence = collect_evidence(stories, selected_ids, results, rss_articles)
-    if {source["kind"] for source in evidence} != {"original", "research"}:
-        logging.info("Market story had insufficient research evidence. Publishing the regular brief.")
+    missing_kinds = {"original", "research"} - {source["kind"] for source in evidence}
+    if missing_kinds:
+        logging.info(
+            "Market story missing evidence of type %s. Publishing the regular brief.",
+            ", ".join(sorted(missing_kinds)),
+        )
         return None
 
-    brief_input = json.dumps({"story": candidates[story_id - 1], "question": question, "evidence": evidence})
-    shorter_prompt = BRIEF_PROMPT + "\nThe previous draft ran long. Aim for the low end of each word target."
-    for prompt in (BRIEF_PROMPT, shorter_prompt):
-        draft = llm_client.chat_json(prompt, brief_input, timeout=40)
+    brief_input = {"story": candidates[story_id - 1], "question": question, "evidence": evidence}
+    prompt = BRIEF_PROMPT
+    for attempt in (1, 2):
+        draft = None
         try:
+            draft = llm_client.chat_json(prompt, json.dumps(brief_input), timeout=40)
             brief = normalize_brief(draft, evidence)
-        except BriefTooLong:
+        except (BriefValidationError, InvalidLLMResponse) as exc:
+            action = "Retrying once." if attempt == 1 else "Publishing the regular brief."
+            logging.warning("Market deep dive draft %d/2 failed (%s). %s", attempt, exc, action)
+            if attempt == 2:
+                return None
+            prompt = BRIEF_PROMPT + (
+                "\nReevaluate the previous attempt using the same evidence. Fix the listed "
+                "validation failures and return the complete JSON object. Treat the previous draft "
+                "as text to revise, and verify its claims against the supplied evidence."
+            )
+            brief_input["validation_failures"] = str(exc)
+            if draft is not None:
+                brief_input["previous_draft"] = draft
             continue
-        logging.info("Market deep dive %s.", "included in snapshot" if brief else "omitted after evidence checks")
+        logging.info("Market deep dive included in snapshot (draft %d/2).", attempt)
         return brief
-
-    logging.info("Market deep dive omitted after two overlong drafts. Publishing the regular brief.")
-    return None

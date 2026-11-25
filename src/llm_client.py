@@ -10,6 +10,10 @@ from openai import OpenAI
 load_dotenv()
 
 
+class InvalidLLMResponse(ValueError):
+    """The model response could not be read as a JSON object."""
+
+
 class LLMClient:
     """Provider-agnostic LLM client configured through LLM_* variables."""
 
@@ -50,10 +54,13 @@ class LLMClient:
         )
         content = response.choices[0].message.content
         if not content:
-            raise ValueError("LLM returned an empty response")
-        result = json.loads(content)
+            raise InvalidLLMResponse("Model returned an empty response")
+        try:
+            result = json.loads(content)
+        except json.JSONDecodeError as exc:
+            raise InvalidLLMResponse("Model response is not valid JSON") from exc
         if not isinstance(result, dict):
-            raise ValueError("LLM JSON response must be an object")
+            raise InvalidLLMResponse("Model response must be a JSON object")
         return result
 
     @staticmethod
